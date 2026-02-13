@@ -1,4 +1,3 @@
-
 let translations = {};
 let currentLang = 'de';
 
@@ -57,6 +56,26 @@ function toggleModal() {
     document.body.classList.toggle('overflow-hidden');
 }
 
+function openZoom(src) {
+    const modal = document.getElementById('zoom-modal');
+    const img = document.getElementById('zoom-img');
+    img.src = src;
+    modal.classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+    setTimeout(() => {
+        modal.classList.add('active');
+    }, 10);
+}
+
+function closeZoom() {
+    const modal = document.getElementById('zoom-modal');
+    modal.classList.remove('active');
+    setTimeout(() => {
+        modal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+    }, 400);
+}
+
 function handleReveal() {
     document.querySelectorAll('.reveal').forEach(el => {
         const rect = el.getBoundingClientRect();
@@ -68,6 +87,8 @@ function handleReveal() {
 window.switchLanguage = switchLanguage;
 window.toggleMobileMenu = toggleMobileMenu;
 window.toggleModal = toggleModal;
+window.openZoom = openZoom;
+window.closeZoom = closeZoom;
 
 document.addEventListener('DOMContentLoaded', () => {
     const browserLang = navigator.language.startsWith('en') ? 'en' : 'de';
@@ -81,6 +102,16 @@ document.addEventListener('DOMContentLoaded', () => {
             nav.classList.remove('scrolled');
         }
         handleReveal();
+    });
+
+    // Handle escape key to close zoom
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeZoom();
+            if (!document.getElementById('modal-overlay').classList.contains('hidden')) {
+                toggleModal();
+            }
+        }
     });
 
     setTimeout(handleReveal, 100);
