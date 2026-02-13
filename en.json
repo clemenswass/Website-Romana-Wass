@@ -38,7 +38,8 @@
     "title": "Science",
     "sub": "Ongoing research projects and international publications to optimize patient care.",
     "hab_title": "Habilitation Focus",
-    "hab_desc": "Development of molecular markers to predict therapeutic response to immunotherapies in advanced NSCLC."
+    "hab_desc": "Development of molecular markers to predict therapeutic response to immunotherapies in advanced NSCLC.",
+    "researchgate_btn": "Publications on ResearchGate"
   },
   "consultation": {
     "title": "Clinical Second Opinion",

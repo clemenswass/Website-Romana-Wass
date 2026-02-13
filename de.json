@@ -38,7 +38,8 @@
     "title": "Wissenschaft",
     "sub": "Laufende Forschungsprojekte und internationale Publikationen zur Optimierung der Patientenversorgung.",
     "hab_title": "Habilitation Focus",
-    "hab_desc": "Entwicklung molekularer Marker zur Vorhersage des Therapieansprechens bei Immuntherapien im fortgeschrittenen NSCLC."
+    "hab_desc": "Entwicklung molekularer Marker zur Vorhersage des Therapieansprechens bei Immuntherapien im fortgeschrittenen NSCLC.",
+    "researchgate_btn": "Publikationen auf ResearchGate"
   },
   "consultation": {
     "title": "Klinische Zweitmeinung",
