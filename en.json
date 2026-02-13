@@ -1,0 +1,75 @@
+{
+  "nav": {
+    "role_label": "Specialist",
+    "about": "About",
+    "expertise": "Expertise",
+    "science": "Science",
+    "lectures": "Lectures",
+    "consultation": "Second Opinion",
+    "contact": "Contact"
+  },
+  "hero": {
+    "role": "Senior Physician | JKU University Hospital Linz",
+    "title": "Dr. Romana Wass, PhD",
+    "sub": "Specialist in Pulmonology with a focus on Oncology. Individual high-end medicine meets academic excellence at JKU University Hospital Linz.",
+    "cta1": "Request Second Opinion",
+    "cta2": "Lectures & Boards"
+  },
+  "expertise": {
+    "tag": "Medical Specializations",
+    "title": "Core Areas",
+    "card1_title": "Thoracic Oncology",
+    "card1_desc": "Interdisciplinary treatment of malignant lung diseases and thoracic tumors.",
+    "card2_title": "Precision Medicine",
+    "card2_desc": "Individualized therapies through molecular biological diagnostics and immuno-oncology.",
+    "card3_title": "Early Detection",
+    "card3_desc": "Investigation of unclear pulmonary findings using state-of-the-art imaging and screening.",
+    "card4_title": "Expert Advisory",
+    "card4_desc": "Scientific consulting for tumor boards and pharmaceutical expert committees."
+  },
+  "about": {
+    "quote": "\"Scientific progress is only valuable when it reaches the patient directly.\"",
+    "p1": "As a senior physician at JKU University Hospital Linz, I combine clinical excellence with academic research. My focus is on optimizing oncological treatment pathways.",
+    "p2": "My goal is to obtain my habilitation to set new standards in pulmonary teaching and research.",
+    "label1": "Habilitation Candidate JKU",
+    "label2": "Academic Teaching"
+  },
+  "science": {
+    "title": "Science",
+    "sub": "Ongoing research projects and international publications to optimize patient care.",
+    "hab_title": "Habilitation Focus",
+    "hab_desc": "Development of molecular markers to predict therapeutic response to immunotherapies in advanced NSCLC."
+  },
+  "consultation": {
+    "title": "Clinical Second Opinion",
+    "desc": "Oncological therapy planning requires maximum precision. I offer well-founded advice and second opinions based on the latest international guidelines for patients and relatives.",
+    "cta": "Send Inquiry"
+  },
+  "contact": {
+    "title": "Contact",
+    "desc": "For inquiries regarding advisory boards, medical lectures, or clinical consultations.",
+    "location_title": "Location",
+    "location_desc": "JKU University Hospital Linz, Krankenhausstrasse 9, 4020 Linz",
+    "btn": "Submit Request"
+  },
+  "footer": {
+    "tag": "High-end Medicine & Research",
+    "legal": "Legal Notice"
+  },
+  "impressum": {
+    "title": "Legal Notice",
+    "owner_label": "Media Owner & Publisher",
+    "owner_text": "Dr. Romana Wass, PhD\nResidence: Salzburg, Austria\nOffice: JKU University Hospital Linz\nKrankenhausstraße 9, 4020 Linz",
+    "subject_label": "Object of Company",
+    "subject_text": "Medical activity (Specialist in Pulmonology)",
+    "chamber_label": "Competent Chamber",
+    "chamber_text": "Medical Chamber of Upper Austria / Medical Chamber of Salzburg",
+    "title_label": "Professional Title",
+    "title_text": "Specialist in Internal Medicine and Pulmonology (awarded in Austria)",
+    "disclaimer_label": "Disclaimer",
+    "disclaimer_text": "All content is for information purposes only and does not constitute medical advice. No liability for external links.",
+    "privacy_label": "Privacy Policy",
+    "privacy_text": "We do not use tracking cookies. Personal data is only processed to respond to inquiries.",
+    "close": "Close"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "nav": {
+    "role_label": "Fachärztin",
+    "about": "Über mich",
+    "expertise": "Expertise",
+    "science": "Wissenschaft",
+    "lectures": "Vorträge",
+    "consultation": "Zweitmeinung",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "role": "Oberärztin | JKU Universitätsklinikum Linz",
+    "title": "Dr. Romana Wass, PhD",
+    "sub": "Spezialistin für Lungenheilkunde mit Schwerpunkt Onkologie. Individuelle Spitzenmedizin trifft auf akademische Exzellenz am JKU Universitätsklinikum Linz.",
+    "cta1": "Zweitmeinung anfragen",
+    "cta2": "Vorträge & Boards"
+  },
+  "expertise": {
+    "tag": "Medizinische Fachbereiche",
+    "title": "Schwerpunkte",
+    "card1_title": "Thoraxonkologie",
+    "card1_desc": "Interdisziplinäre Behandlung von bösartigen Lungenerkrankungen und Brustraumtumoren.",
+    "card2_title": "Präzisionsmedizin",
+    "card2_desc": "Individualisierte Therapien durch molekularbiologische Diagnostik und Immunonkologie.",
+    "card3_title": "Früherkennung",
+    "card3_desc": "Abklärung unklarer Lungenbefunde mittels modernster Bildgebungsverfahren und Screening.",
+    "card4_title": "Expert Advisory",
+    "card4_desc": "Wissenschaftliche Beratung für Tumorboards und pharmazeutische Expertengremien."
+  },
+  "about": {
+    "quote": "\"Wissenschaftlicher Fortschritt ist dann wertvoll, wenn er unmittelbar beim Patienten ankommt.\"",
+    "p1": "Als Oberärztin am JKU Universitätsklinikum Linz verbinde ich klinische Exzellenz mit akademischer Forschung. Mein Fokus liegt auf der Optimierung der onkologischen Behandlungspfade.",
+    "p2": "Mein Ziel ist die Erlangung der Habilitation, um neue Standards in der pneumologischen Lehre und Forschung zu setzen.",
+    "label1": "Habilitationskandidatin JKU",
+    "label2": "Akademische Lehre"
+  },
+  "science": {
+    "title": "Wissenschaft",
+    "sub": "Laufende Forschungsprojekte und internationale Publikationen zur Optimierung der Patientenversorgung.",
+    "hab_title": "Habilitation Focus",
+    "hab_desc": "Entwicklung molekularer Marker zur Vorhersage des Therapieansprechens bei Immuntherapien im fortgeschrittenen NSCLC."
+  },
+  "consultation": {
+    "title": "Klinische Zweitmeinung",
+    "desc": "Die onkologische Therapieplanung erfordert höchste Präzision. Ich biete fundierte Beratung und Zweitmeinungen basierend auf neuesten internationalen Leitlinien für Patienten und Angehörige.",
+    "cta": "Anfrage senden"
+  },
+  "contact": {
+    "title": "Kontakt",
+    "desc": "Für Anfragen zu Advisory Boards, medizinischen Vorträgen oder klinischen Konsultationen.",
+    "location_title": "Dienstort",
+    "location_desc": "JKU Universitätsklinikum Linz, Krankenhausstraße 9, 4020 Linz",
+    "btn": "Anfrage absenden"
+  },
+  "footer": {
+    "tag": "Spitzenmedizin & Forschung",
+    "legal": "Impressum"
+  },
+  "impressum": {
+    "title": "Impressum",
+    "owner_label": "Medieninhaberin & Herausgeberin",
+    "owner_text": "Dr. Romana Wass, PhD\nWohnort: Salzburg, Österreich\nDienstort: JKU Universitätsklinikum Linz\nKrankenhausstraße 9, 4020 Linz",
+    "subject_label": "Unternehmensgegenstand",
+    "subject_text": "Ärztliche Tätigkeit (Fachärztin für Pneumologie)",
+    "chamber_label": "Zuständige Kammer",
+    "chamber_text": "Ärztekammer für Oberösterreich / Ärztekammer für Salzburg",
+    "title_label": "Berufsbezeichnung",
+    "title_text": "Fachärztin für Innere Medizin und Pneumologie (verliehen in Österreich)",
+    "disclaimer_label": "Haftungsausschluss",
+    "disclaimer_text": "Sämtliche Inhalte dienen lediglich der Information und stellen keine medizinische Beratung dar. Keine Haftung für externe Links.",
+    "privacy_label": "Datenschutz",
+    "privacy_text": "Wir verwenden keine Tracking-Cookies. Personenbezogene Daten werden nur zur Beantwortung von Anfragen verarbeitet.",
+    "close": "Schließen"
+  }
+}

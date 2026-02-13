@@ -1,52 +1,330 @@
-
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dr. Romana Wass, PhD | Lungenfachärztin</title>
+    <!-- Tailwind CSS for high-end layout -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    
     <style>
-        :root {
-            --phi: 1.61803398875;
-            --phi-inv: 0.61803398875;
+        :root { --phi: 1.61803398875; }
+        body { 
+            font-family: 'Open Sans', sans-serif; 
+            line-height: var(--phi); 
+            -webkit-font-smoothing: antialiased; 
+            transition: opacity 0.5s ease;
         }
-        body {
-            font-family: 'Open Sans', sans-serif;
-            scroll-behavior: smooth;
-            line-height: var(--phi);
-            -webkit-font-smoothing: antialiased;
+        h1, h2, h3, h4, h5, .font-heading { 
+            font-family: 'Montserrat', sans-serif; 
+            letter-spacing: -0.015em; 
         }
-        h1, h2, h3, h4, h5, .font-heading {
-            font-family: 'Montserrat', sans-serif;
-            letter-spacing: -0.015em;
-        }
-        .phi-aspect {
-            aspect-ratio: 1.618 / 1;
-        }
-        .phi-aspect-v {
-            aspect-ratio: 1 / 1.618;
-        }
-        /* Phi-based custom spacing and sizes */
+        .phi-aspect-v { aspect-ratio: 1 / 1.618; }
         .phi-tracking { letter-spacing: 0.1618em; }
-        .phi-gap { gap: 1.618rem; }
-        .phi-gap-lg { gap: 2.618rem; }
+        
+        nav.scrolled {
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        #modal-overlay.hidden { display: none; }
+        #modal-overlay {
+            display: flex; position: fixed; inset: 0; z-index: 100;
+            background-color: rgba(15, 23, 42, 0.8); backdrop-filter: blur(4px);
+            align-items: center; justify-content: center; padding: 1.5rem;
+        }
+
+        .loading { opacity: 0; }
+        .loaded { opacity: 1; }
+        
+        .whitespace-pre-line { white-space: pre-line; }
     </style>
-<script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@^19.2.4",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "lucide-react": "https://esm.sh/lucide-react@^0.563.0"
-  }
-}
-</script>
 </head>
-<body class="bg-slate-50 text-slate-900 overflow-x-hidden">
-    <div id="root"></div>
+<body class="bg-white text-slate-900 overflow-x-hidden loading" id="app-body">
+
+    <!-- Navigation -->
+    <nav id="main-nav" class="fixed w-full z-50 transition-all duration-500 py-6">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <a href="#" class="text-2xl font-heading font-black tracking-tighter text-blue-950">
+                    Dr. Romana Wass, PhD<span class="text-blue-600">.</span>
+                </a>
+                <span class="text-[10px] font-bold uppercase phi-tracking text-slate-500 hidden lg:block">
+                    PhD | <span data-i18n="nav.role_label"></span>
+                </span>
+            </div>
+
+            <div class="hidden lg:flex items-center space-x-10">
+                <div class="flex space-x-8 text-[0.75rem] font-bold uppercase tracking-widest text-slate-800">
+                    <a href="#about" class="hover:text-blue-600 transition-colors" data-i18n="nav.about"></a>
+                    <a href="#expertise" class="hover:text-blue-600 transition-colors" data-i18n="nav.expertise"></a>
+                    <a href="#science" class="hover:text-blue-600 transition-colors" data-i18n="nav.science"></a>
+                    <a href="#lectures" class="hover:text-blue-600 transition-colors" data-i18n="nav.lectures"></a>
+                    <a href="#consultation" class="text-blue-700 font-extrabold hover:text-blue-900 transition-all" data-i18n="nav.consultation"></a>
+                </div>
+                
+                <button onclick="switchLanguage()" class="flex items-center space-x-2 text-[0.75rem] font-bold uppercase tracking-widest px-4 py-2 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors border border-slate-200">
+                    <span id="lang-toggle-label">EN</span>
+                </button>
+
+                <div class="flex items-center space-x-4 border-l border-slate-200 pl-8">
+                    <a href="https://www.linkedin.com/in/romana-wass/" target="_blank" class="text-slate-400 hover:text-blue-600 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <button class="lg:hidden text-slate-900 p-2" onclick="toggleMobileMenu()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-[60] translate-x-full transition-transform duration-500 flex flex-col p-10 pt-32 space-y-8 text-2xl font-bold">
+        <button class="absolute top-8 right-8" onclick="toggleMobileMenu()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <a href="#about" onclick="toggleMobileMenu()" data-i18n="nav.about"></a>
+        <a href="#expertise" onclick="toggleMobileMenu()" data-i18n="nav.expertise"></a>
+        <a href="#science" onclick="toggleMobileMenu()" data-i18n="nav.science"></a>
+        <a href="#consultation" onclick="toggleMobileMenu()" data-i18n="nav.consultation"></a>
+        <div class="pt-8 border-t border-slate-100">
+            <button onclick="switchLanguage(); toggleMobileMenu()" class="text-blue-600 font-bold" id="mobile-lang-label">English</button>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-white">
+        <div class="absolute top-0 right-0 w-[38.2%] h-full bg-blue-50/40 hidden lg:block"></div>
+        <div class="container mx-auto px-6 grid lg:grid-cols-[61.8%_1fr] gap-12 items-center relative z-10">
+            <div class="reveal active py-16">
+                <span class="inline-block px-5 py-2 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold uppercase phi-tracking mb-8 border border-blue-200" data-i18n="hero.role"></span>
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading font-black text-slate-900 leading-[1.05] mb-8" data-i18n="hero.title"></h1>
+                <p class="text-xl text-slate-500 mb-12 max-w-xl leading-relaxed font-medium" data-i18n="hero.sub"></p>
+                <div class="flex flex-wrap gap-5">
+                    <a href="#consultation" class="bg-blue-950 text-white px-12 py-5 rounded-2xl font-bold hover:bg-blue-900 transition-all shadow-2xl shadow-blue-200 flex items-center group">
+                        <span data-i18n="hero.cta1"></span>
+                        <svg class="ml-3 group-hover:translate-x-1 transition-transform" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                    <a href="#lectures" class="bg-white border-2 border-slate-200 text-slate-700 px-12 py-5 rounded-2xl font-bold hover:border-blue-400 hover:text-blue-600 transition-all" data-i18n="hero.cta2"></a>
+                </div>
+            </div>
+            <div class="relative hidden lg:block reveal active" style="transition-delay: 0.2s;">
+                <div class="phi-aspect-v w-full overflow-hidden rounded-[3rem] shadow-2xl relative border-8 border-white bg-slate-100">
+                    <img src="img/alexandr-podvalny-tE7_jvK-_YU-unsplash.jpg" alt="Dr. Romana Wass, PhD" class="absolute inset-0 w-full h-full object-cover grayscale-[0.1] hover:grayscale-0 transition-all duration-1000">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise -->
+    <section id="expertise" class="py-32 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20 reveal">
+                <span class="text-blue-600 font-black text-[10px] uppercase phi-tracking mb-4 block" data-i18n="expertise.tag"></span>
+                <h2 class="text-4xl md:text-5xl font-heading font-black text-blue-950 mb-8" data-i18n="expertise.title"></h2>
+                <div class="w-20 h-2 bg-blue-600 mx-auto rounded-full"></div>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div class="p-12 bg-white rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition-all group reveal">
+                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.8 2.3A.3.3 0 1 0 5 2a.3.3 0 0 0-.2.3Z"/><path d="M10 22v-2"/><path d="M7 11h.01"/><path d="M7 15h.01"/><path d="M11 11h.01"/><path d="M11 15h.01"/><path d="M15 11h.01"/><path d="M15 15h.01"/><path d="M19 11h.01"/><path d="M19 15h.01"/><path d="M2 21h20"/><path d="M4 21V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v17"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-black mb-4 text-slate-900 tracking-tight" data-i18n="expertise.card1_title"></h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-i18n="expertise.card1_desc"></p>
+                </div>
+                <div class="p-12 bg-white rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition-all group reveal" style="transition-delay: 0.1s;">
+                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v8"/><path d="M12 14v8"/><path d="M4.93 4.93l5.66 5.66"/><path d="M13.41 13.41l5.66 5.66"/><path d="M2 12h8"/><path d="M14 12h8"/><path d="M4.93 19.07l5.66-5.66"/><path d="M13.41 10.59l5.66-5.66"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-black mb-4 text-slate-900 tracking-tight" data-i18n="expertise.card2_title"></h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-i18n="expertise.card2_desc"></p>
+                </div>
+                <div class="p-12 bg-white rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition-all group reveal" style="transition-delay: 0.2s;">
+                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-black mb-4 text-slate-900 tracking-tight" data-i18n="expertise.card3_title"></h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-i18n="expertise.card3_desc"></p>
+                </div>
+                <div class="p-12 bg-white rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition-all group reveal" style="transition-delay: 0.3s;">
+                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-heading font-black mb-4 text-slate-900 tracking-tight" data-i18n="expertise.card4_title"></h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-i18n="expertise.card4_desc"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Science -->
+    <section id="science" class="py-32 bg-slate-900 text-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-7xl font-heading font-black mb-12 tracking-tight reveal" data-i18n="science.title"></h2>
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="space-y-6 reveal">
+                    <div class="p-8 bg-white/5 border border-white/5 rounded-3xl">
+                        <span class="text-2xl font-black text-blue-500/40 block mb-2">2024</span>
+                        <h4 class="font-bold text-xl mb-1">Impact of Liquid Biopsy on Lung Cancer Staging</h4>
+                        <p class="text-xs text-slate-400 uppercase font-bold tracking-widest italic">Journal of Clinical Oncology</p>
+                    </div>
+                    <div class="p-8 bg-white/5 border border-white/5 rounded-3xl">
+                        <span class="text-2xl font-black text-blue-500/40 block mb-2">2023</span>
+                        <h4 class="font-bold text-xl mb-1">Novel Immunotherapy Combinations in SCLC</h4>
+                        <p class="text-xs text-slate-400 uppercase font-bold tracking-widest italic">The Lancet Respiratory Medicine</p>
+                    </div>
+                </div>
+                <div class="bg-blue-600 p-12 rounded-[3rem] shadow-2xl relative overflow-hidden flex flex-col justify-between group reveal" style="transition-delay: 0.2s;">
+                    <div class="absolute inset-0 opacity-20 transition-transform duration-[15s] group-hover:scale-110">
+                        <img src="input_file_7.png" alt="DNA" class="w-full h-full object-cover">
+                    </div>
+                    <div class="relative z-10">
+                        <h3 class="text-3xl font-heading font-black mb-6 tracking-tight" data-i18n="science.hab_title"></h3>
+                        <p class="text-blue-50 text-lg leading-relaxed font-medium" data-i18n="science.hab_desc"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 bg-white border-t border-slate-100">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10">
+            <div class="text-center md:text-left">
+                <div class="text-2xl font-heading font-black text-blue-950 tracking-tighter">Dr. Romana Wass<span class="text-blue-600">.</span></div>
+                <p class="text-[10px] font-black text-slate-400 uppercase phi-tracking mt-1" data-i18n="footer.tag"></p>
+            </div>
+            <div class="flex space-x-8 items-center">
+                <button onclick="toggleModal()" class="text-[10px] font-black uppercase phi-tracking text-slate-500 hover:text-blue-600" data-i18n="footer.legal"></button>
+                <div class="text-slate-300 text-[10px] font-bold uppercase phi-tracking">&copy; 2024 wass.at</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Impressum Modal (Manual HTML Version) -->
+    <div id="modal-overlay" class="hidden" onclick="if(event.target === this) toggleModal()">
+        <div class="bg-white w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-3xl shadow-2xl p-10 relative">
+            <button onclick="toggleModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-900">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <h2 class="text-3xl font-heading font-bold text-blue-900 mb-8" data-i18n="impressum.title"></h2>
+            
+            <div class="space-y-8 text-slate-700 leading-relaxed text-sm">
+                <section>
+                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="impressum.owner_label"></h3>
+                    <p class="whitespace-pre-line" data-i18n="impressum.owner_text"></p>
+                </section>
+                <section>
+                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="impressum.subject_label"></h3>
+                    <p data-i18n="impressum.subject_text"></p>
+                </section>
+                <section>
+                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="impressum.chamber_label"></h3>
+                    <p data-i18n="impressum.chamber_text"></p>
+                </section>
+                <section>
+                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="impressum.title_label"></h3>
+                    <p data-i18n="impressum.title_text"></p>
+                </section>
+                <section>
+                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="impressum.disclaimer_label"></h3>
+                    <p data-i18n="impressum.disclaimer_text"></p>
+                </section>
+                <section>
+                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="impressum.privacy_label"></h3>
+                    <p data-i18n="impressum.privacy_text"></p>
+                </section>
+            </div>
+            
+            <div class="mt-10 pt-6 border-t border-slate-100 flex justify-end">
+                <button onclick="toggleModal()" class="bg-slate-100 text-slate-700 px-6 py-2 rounded-lg font-bold hover:bg-slate-200 transition-all" data-i18n="impressum.close"></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let translations = {};
+        let currentLang = 'de';
+
+        async function loadTranslations(lang) {
+            try {
+                const response = await fetch(`${lang}.json`);
+                translations = await response.json();
+                currentLang = lang;
+                applyTranslations();
+                updateUI();
+            } catch (error) {
+                console.error('Translation loading failed:', error);
+                document.getElementById('app-body').classList.remove('loading');
+                document.getElementById('app-body').classList.add('loaded');
+            }
+        }
+
+        function applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                const value = key.split('.').reduce((obj, k) => (obj || {})[k], translations);
+                if (value) el.innerText = value;
+            });
+            document.getElementById('app-body').classList.remove('loading');
+            document.getElementById('app-body').classList.add('loaded');
+        }
+
+        function switchLanguage() {
+            const next = currentLang === 'de' ? 'en' : 'de';
+            loadTranslations(next);
+        }
+
+        function updateUI() {
+            document.getElementById('lang-toggle-label').innerText = currentLang === 'de' ? 'EN' : 'DE';
+            document.getElementById('mobile-lang-label').innerText = currentLang === 'de' ? 'English' : 'Deutsch';
+            document.documentElement.lang = currentLang;
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('translate-x-full');
+            document.body.classList.toggle('overflow-hidden');
+        }
+
+        function toggleModal() {
+            document.getElementById('modal-overlay').classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
+        }
+
+        function handleReveal() {
+            document.querySelectorAll('.reveal').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) el.classList.add('active');
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const browserLang = navigator.language.startsWith('en') ? 'en' : 'de';
+            loadTranslations(browserLang);
+            
+            window.addEventListener('scroll', () => {
+                const nav = document.getElementById('main-nav');
+                if (window.scrollY > 60) nav.classList.add('scrolled');
+                else nav.classList.remove('scrolled');
+                handleReveal();
+            });
+
+            setTimeout(handleReveal, 100);
+        });
+    </script>
 </body>
 </html>
