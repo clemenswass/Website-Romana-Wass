@@ -1,20 +1,24 @@
-// Adding export {} to mark this file as a module, preventing global scope naming conflicts with index.js
+// Adding export {} to mark this file as a module, preventing global scope naming conflicts
 export {};
 
 let translations: Record<string, any> = {};
 let currentLang = 'de';
 
 async function loadTranslations(lang: string) {
+    const body = document.getElementById('app-body');
     try {
         const response = await fetch(`${lang}.json`);
+        if (!response.ok) throw new Error('Network response was not ok');
         translations = await response.json();
         currentLang = lang;
         applyTranslations();
         updateUI();
     } catch (error) {
-        console.error('Translation loading failed:', error);
-        document.getElementById('app-body')?.classList.remove('loading');
-        document.getElementById('app-body')?.classList.add('loaded');
+        console.warn(`Translation loading for ${lang} failed, using existing or default:`, error);
+        // Ensure UI is visible even if fetch fails (e.g. Brave Shields block)
+        body?.classList.remove('loading');
+        body?.classList.add('loaded');
+        handleReveal(); // Trigger initial reveal
     }
 }
 
@@ -33,8 +37,9 @@ function applyTranslations() {
             }
         }
     });
-    document.getElementById('app-body')?.classList.remove('loading');
-    document.getElementById('app-body')?.classList.add('loaded');
+    const body = document.getElementById('app-body');
+    body?.classList.remove('loading');
+    body?.classList.add('loaded');
 }
 
 function switchLanguage() {
@@ -85,7 +90,8 @@ function closeZoom() {
 function handleReveal() {
     document.querySelectorAll('.reveal').forEach(el => {
         const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) el.classList.add('active');
+        const triggerPoint = window.innerHeight * 0.95; // More lenient for mobile
+        if (rect.top < triggerPoint) el.classList.add('active');
     });
 }
 
@@ -100,15 +106,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const browserLang = navigator.language.startsWith('en') ? 'en' : 'de';
     loadTranslations(browserLang);
     
+    // Throttled scroll listener
+    let scrollTimeout: number | null = null;
     window.addEventListener('scroll', () => {
         const nav = document.getElementById('main-nav');
-        if (window.scrollY > 60) {
+        if (window.scrollY > 40) {
             nav?.classList.add('scrolled');
         } else {
             nav?.classList.remove('scrolled');
         }
-        handleReveal();
-    });
+
+        if (!scrollTimeout) {
+            scrollTimeout = window.requestAnimationFrame(() => {
+                handleReveal();
+                scrollTimeout = null;
+            });
+        }
+    }, { passive: true });
 
     // Handle escape key to close modals
     window.addEventListener('keydown', (e) => {
@@ -121,5 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    setTimeout(handleReveal, 100);
+    // Initial trigger
+    setTimeout(handleReveal, 300);
 });

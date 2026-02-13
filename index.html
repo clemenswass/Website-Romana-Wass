@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="de" class="scroll-smooth">
+<html lang="de" class="scroll-smooth overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Dr. Romana Wass, PhD | Lungenfachärztin</title>
     <!-- Tailwind CSS for high-end layout -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -17,6 +17,7 @@
             font-family: 'Open Sans', sans-serif; 
             line-height: var(--phi); 
             -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale;
             transition: opacity 0.5s ease;
         }
         h1, h2, h3, h4, h5, .font-heading { 
@@ -30,26 +31,35 @@
             width: 100%;
             height: auto;
             position: relative;
+            background-color: #f1f5f9; /* slate-100 fallback */
         } 
         
         .phi-tracking { letter-spacing: 0.1618em; }
         
         nav.scrolled {
-            background-color: rgba(255, 255, 255, 0.98);
+            background-color: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
+            -webkit-backdrop-filter: blur(12px);
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
             border-bottom: 1px solid rgba(226, 232, 240, 0.8);
         }
 
-        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal { 
+            opacity: 0; 
+            transform: translateY(20px); 
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
+        }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         #modal-overlay.hidden, #zoom-modal.hidden { display: none; }
         #modal-overlay, #zoom-modal {
             display: flex; position: fixed; inset: 0; z-index: 100;
-            background-color: rgba(15, 23, 42, 0.9); backdrop-filter: blur(8px);
+            background-color: rgba(15, 23, 42, 0.9); 
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             align-items: center; justify-content: center; padding: 1.5rem;
         }
         
@@ -68,6 +78,11 @@
         
         .whitespace-pre-line { white-space: pre-line; }
 
+        /* Mobile specific fixes */
+        @media (max-width: 1024px) {
+            .phi-aspect-v { border-radius: 2rem; }
+        }
+
         /* Ensure images inside aspect-ratio boxes always cover properly */
         .phi-aspect-v img {
             position: absolute;
@@ -77,6 +92,15 @@
             height: 100%;
             object-fit: cover;
         }
+
+        /* Disable scroll reveal on low-motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                transition: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
     </style>
 </head>
 <body class="bg-white text-slate-900 overflow-x-hidden loading" id="app-body">
@@ -85,22 +109,22 @@
     <nav id="main-nav" class="fixed w-full z-50 transition-all duration-500 py-6">
         <div class="container mx-auto px-6 flex justify-between items-center">
             <div class="flex items-center space-x-2">
-                <a href="#" class="text-2xl font-heading font-black tracking-tighter text-blue-950">
+                <a href="#" class="text-xl md:text-2xl font-heading font-black tracking-tighter text-blue-950">
                     Dr. Romana Wass, PhD<span class="text-blue-600">.</span>
                 </a>
                 <span class="text-[10px] font-bold uppercase phi-tracking text-slate-500 hidden lg:block">
-                    | <span data-i18n="nav.role_label"></span>
+                    | <span data-i18n="nav.role_label">Fachärztin</span>
                 </span>
             </div>
 
             <div class="hidden lg:flex items-center space-x-10">
                 <div class="flex space-x-8 text-[0.75rem] font-bold uppercase tracking-widest text-slate-800">
-                    <a href="#about" class="hover:text-blue-600 transition-colors" data-i18n="nav.about"></a>
-                    <a href="#expertise" class="hover:text-blue-600 transition-colors" data-i18n="nav.expertise"></a>
-                    <a href="#science" class="hover:text-blue-600 transition-colors" data-i18n="nav.science"></a>
-                    <a href="#lectures" class="hover:text-blue-600 transition-colors" data-i18n="nav.lectures"></a>
-                    <a href="#consultation" class="hover:text-blue-600 transition-colors" data-i18n="nav.consultation"></a>
-                    <a href="#contact" class="text-blue-700 font-extrabold hover:text-blue-900 transition-all" data-i18n="nav.contact"></a>
+                    <a href="#about" class="hover:text-blue-600 transition-colors" data-i18n="nav.about">Über mich</a>
+                    <a href="#expertise" class="hover:text-blue-600 transition-colors" data-i18n="nav.expertise">Expertise</a>
+                    <a href="#science" class="hover:text-blue-600 transition-colors" data-i18n="nav.science">Wissenschaft</a>
+                    <a href="#lectures" class="hover:text-blue-600 transition-colors" data-i18n="nav.lectures">Vorträge & Advisory</a>
+                    <a href="#consultation" class="hover:text-blue-600 transition-colors" data-i18n="nav.consultation">Zweitmeinung</a>
+                    <a href="#contact" class="text-blue-700 font-extrabold hover:text-blue-900 transition-all" data-i18n="nav.contact">Kontakt</a>
                 </div>
                 
                 <button onclick="switchLanguage()" aria-label="Switch Language" class="flex items-center space-x-2 text-[0.75rem] font-bold uppercase tracking-widest px-4 py-2 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors border border-slate-200">
@@ -114,7 +138,7 @@
                 </div>
             </div>
 
-            <button class="lg:hidden text-slate-900 p-2" onclick="toggleMobileMenu()" aria-label="Open Mobile Menu">
+            <button class="lg:hidden text-slate-900 p-2 min-h-[44px] min-w-[44px] flex items-center justify-center" onclick="toggleMobileMenu()" aria-label="Open Mobile Menu">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
             </button>
         </div>
@@ -122,17 +146,17 @@
 
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="fixed inset-0 bg-white z-[60] translate-x-full transition-transform duration-500 flex flex-col p-10 pt-32 space-y-8 text-2xl font-bold">
-        <button class="absolute top-8 right-8" onclick="toggleMobileMenu()" aria-label="Close Mobile Menu">
+        <button class="absolute top-8 right-8 p-4" onclick="toggleMobileMenu()" aria-label="Close Mobile Menu">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
-        <a href="#about" onclick="toggleMobileMenu()" data-i18n="nav.about"></a>
-        <a href="#expertise" onclick="toggleMobileMenu()" data-i18n="nav.expertise"></a>
-        <a href="#science" onclick="toggleMobileMenu()" data-i18n="nav.science"></a>
-        <a href="#lectures" onclick="toggleMobileMenu()" data-i18n="nav.lectures"></a>
-        <a href="#consultation" onclick="toggleMobileMenu()" data-i18n="nav.consultation"></a>
-        <a href="#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact"></a>
+        <a href="#about" onclick="toggleMobileMenu()" data-i18n="nav.about">Über mich</a>
+        <a href="#expertise" onclick="toggleMobileMenu()" data-i18n="nav.expertise">Expertise</a>
+        <a href="#science" onclick="toggleMobileMenu()" data-i18n="nav.science">Wissenschaft</a>
+        <a href="#lectures" onclick="toggleMobileMenu()" data-i18n="nav.lectures">Vorträge & Advisory</a>
+        <a href="#consultation" onclick="toggleMobileMenu()" data-i18n="nav.consultation">Zweitmeinung</a>
+        <a href="#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact">Kontakt</a>
         <div class="pt-8 border-t border-slate-100">
-            <button onclick="switchLanguage(); toggleMobileMenu()" class="text-blue-600 font-bold" id="mobile-lang-label">English</button>
+            <button onclick="switchLanguage(); toggleMobileMenu()" class="text-blue-600 font-bold p-4 -ml-4" id="mobile-lang-label">English</button>
         </div>
     </div>
 
@@ -142,15 +166,15 @@
         <div class="absolute top-0 right-0 w-full lg:w-[45%] h-full bg-blue-50/40 z-0"></div>
         <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
             <div class="reveal active py-10 lg:py-16">
-                <span class="inline-block px-5 py-2 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold uppercase phi-tracking mb-8 border border-blue-200" data-i18n="hero.role"></span>
-                <h1 class="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-black text-slate-900 leading-[1.1] mb-8" data-i18n="hero.title"></h1>
-                <p class="text-lg md:text-xl text-slate-500 mb-10 max-w-xl leading-relaxed font-medium" data-i18n="hero.sub"></p>
+                <span class="inline-block px-5 py-2 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold uppercase phi-tracking mb-8 border border-blue-200" data-i18n="hero.role">Oberärztin | JKU Universitätsklinikum Linz</span>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-black text-slate-900 leading-[1.1] mb-8" data-i18n="hero.title">Dr. Romana Wass, PhD</h1>
+                <p class="text-lg md:text-xl text-slate-500 mb-10 max-w-xl leading-relaxed font-medium" data-i18n="hero.sub">Spezialistin für Lungenheilkunde mit Schwerpunkt Onkologie. Individuelle Spitzenmedizin trifft auf akademische Exzellenz am JKU Universitätsklinikum Linz.</p>
                 <div class="flex flex-wrap gap-5">
                     <a href="#consultation" class="bg-blue-950 text-white px-10 py-5 rounded-2xl font-bold hover:bg-blue-900 transition-all shadow-xl shadow-blue-200 flex items-center group">
-                        <span data-i18n="hero.cta1"></span>
+                        <span data-i18n="hero.cta1">Zweitmeinung anfragen</span>
                         <svg class="ml-3 group-hover:translate-x-1 transition-transform" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
-                    <a href="#lectures" class="bg-white border-2 border-slate-200 text-slate-700 px-10 py-5 rounded-2xl font-bold hover:border-blue-400 hover:text-blue-600 transition-all" data-i18n="hero.cta2"></a>
+                    <a href="#lectures" class="bg-white border-2 border-slate-200 text-slate-700 px-10 py-5 rounded-2xl font-bold hover:border-blue-400 hover:text-blue-600 transition-all" data-i18n="hero.cta2">Vorträge & Advisory</a>
                 </div>
             </div>
             <div class="relative reveal active w-full flex justify-center lg:justify-end" style="transition-delay: 0.2s;">
@@ -165,8 +189,8 @@
     <section id="expertise" class="py-32 bg-slate-50">
         <div class="container mx-auto px-6">
             <div class="text-center mb-20 reveal">
-                <span class="text-blue-600 font-black text-[10px] uppercase phi-tracking mb-4 block" data-i18n="expertise.tag"></span>
-                <h2 class="text-4xl md:text-5xl font-heading font-black text-blue-950 mb-8" data-i18n="expertise.title"></h2>
+                <span class="text-blue-600 font-black text-[10px] uppercase phi-tracking mb-4 block" data-i18n="expertise.tag">Medizinische Fachbereiche</span>
+                <h2 class="text-4xl md:text-5xl font-heading font-black text-blue-950 mb-8" data-i18n="expertise.title">Schwerpunkte</h2>
                 <div class="w-20 h-2 bg-blue-600 mx-auto rounded-full"></div>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -174,29 +198,29 @@
                     <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
                     </div>
-                    <h3 class="text-2xl font-heading font-black mb-4 text-slate-900 tracking-tight" data-i18n="expertise.card1_title"></h3>
-                    <p class="text-slate-500 text-sm leading-relaxed" data-i18n="expertise.card1_desc"></p>
+                    <h3 class="text-2xl font-heading font-black mb-4 text-slate-900 tracking-tight" data-i18n="expertise.card1_title">Thoraxonkologie</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-i18n="expertise.card1_desc">Interdisziplinäre Behandlung von bösartigen Lungenerkrankungen und Brustraumtumoren.</p>
                 </div>
                 <div class="p-10 bg-white rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition-all group reveal" style="transition-delay: 0.1s;">
                     <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
                     </div>
-                    <h3 class="text-2xl font-heading font-black mb-4 text-slate-900 tracking-tight" data-i18n="expertise.card2_title"></h3>
-                    <p class="text-slate-500 text-sm leading-relaxed" data-i18n="expertise.card2_desc"></p>
+                    <h3 class="text-2xl font-heading font-black mb-4 text-slate-900 tracking-tight" data-i18n="expertise.card2_title">Präzisionsmedizin</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-i18n="expertise.card2_desc">Individualisierte Therapien durch molekularbiologische Diagnostik und Immunonkologie.</p>
                 </div>
                 <div class="p-10 bg-white rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition-all group reveal" style="transition-delay: 0.2s;">
                     <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                     </div>
-                    <h3 class="text-2xl font-heading font-black mb-4 text-slate-900 tracking-tight" data-i18n="expertise.card3_title"></h3>
-                    <p class="text-slate-500 text-sm leading-relaxed" data-i18n="expertise.card3_desc"></p>
+                    <h3 class="text-2xl font-heading font-black mb-4 text-slate-900 tracking-tight" data-i18n="expertise.card3_title">Früherkennung</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-i18n="expertise.card3_desc">Abklärung unklarer Lungenbefunde mittels modernster Bildgebungsverfahren und Screening.</p>
                 </div>
                 <div class="p-10 bg-white rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition-all group reveal" style="transition-delay: 0.3s;">
                     <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                     </div>
-                    <h3 class="text-2xl font-heading font-black mb-4 text-slate-900 tracking-tight" data-i18n="expertise.card4_title"></h3>
-                    <p class="text-slate-500 text-sm leading-relaxed" data-i18n="expertise.card4_desc"></p>
+                    <h3 class="text-2xl font-heading font-black mb-4 text-slate-900 tracking-tight" data-i18n="expertise.card4_title">Expert Advisory</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed" data-i18n="expertise.card4_desc">Wissenschaftliche Beratung für Tumorboards und pharmazeutische Expertengremien.</p>
                 </div>
             </div>
         </div>
@@ -207,16 +231,16 @@
         <div class="container mx-auto px-6">
             <div class="flex flex-col lg:flex-row gap-20 items-center">
                 <div class="w-full lg:w-[61.8%] reveal">
-                    <h2 class="text-3xl md:text-5xl font-heading font-black text-blue-950 mb-10 leading-tight italic" data-i18n="about.quote"></h2>
+                    <h2 class="text-3xl md:text-5xl font-heading font-black text-blue-950 mb-10 leading-tight italic" data-i18n="about.quote">"Wissenschaftlicher Fortschritt ist dann wertvoll, wenn er unmittelbar beim Patienten ankommt."</h2>
                     <div class="space-y-8 text-slate-600 text-lg leading-relaxed font-medium">
-                        <p data-i18n="about.p1"></p>
-                        <p data-i18n="about.p2"></p>
+                        <p data-i18n="about.p1">Als Oberärztin am JKU Universitätsklinikum Linz verbinde ich klinische Exzellenz mit akademischer Forschung. Mein Fokus liegt auf der Optimierung der onkologischen Behandlungspfade.</p>
+                        <p data-i18n="about.p2">Mein Ziel ist die Erlangung der Habilitation, um neue Standards in der pneumologischen Lehre und Forschung zu setzen.</p>
                         <div class="grid sm:grid-cols-2 gap-8 pt-8">
                             <div class="flex items-center space-x-4 p-8 bg-slate-50 rounded-3xl border border-slate-100">
-                                <span class="text-blue-600 font-bold" data-i18n="about.label1"></span>
+                                <span class="text-blue-600 font-bold" data-i18n="about.label1">Habilitationskandidatin JKU</span>
                             </div>
                             <div class="flex items-center space-x-4 p-8 bg-slate-50 rounded-3xl border border-slate-100">
-                                <span class="text-blue-600 font-bold" data-i18n="about.label2"></span>
+                                <span class="text-blue-600 font-bold" data-i18n="about.label2">Akademische Lehre</span>
                             </div>
                         </div>
                     </div>
@@ -233,8 +257,8 @@
     <!-- Science -->
     <section id="science" class="py-32 bg-slate-900 text-white">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl md:text-7xl font-heading font-black mb-4 tracking-tight reveal" data-i18n="science.title"></h2>
-            <p class="text-blue-400 text-lg mb-12 max-w-2xl reveal" data-i18n="science.sub"></p>
+            <h2 class="text-4xl md:text-7xl font-heading font-black mb-4 tracking-tight reveal" data-i18n="science.title">Wissenschaft</h2>
+            <p class="text-blue-400 text-lg mb-12 max-w-2xl reveal" data-i18n="science.sub">Laufende Forschungsprojekte und internationale Publikationen zur Optimierung der Patientenversorgung.</p>
             
             <div class="grid lg:grid-cols-2 gap-12 mt-12">
                 <div class="space-y-6 reveal">
@@ -255,7 +279,7 @@
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-blue-500">
                                 <path d="M19.344 11.232c-.048-.048-.12-.048-.168 0-.048.048-.048.12 0 .168.048.048.12.048.168 0 .048-.048.048-.12 0-.168zm-.12 1.296c-.048-.048-.12-.048-.168 0-.048.048-.048.12 0 .168.048.048.12.048.168 0 .048-.048.048-.12 0-.168zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm6.216 13.92c-.288.288-.744.288-1.032 0s-.288-.744 0-1.032.744-.288 1.032 0 .288.744 0 1.032zm-1.032-2.16c-.288.288-.744.288-1.032 0s-.288-.744 0-1.032.744-.288 1.032 0 .288.744 0 1.032zm1.032-1.032c-.288.288-.744.288-1.032 0s-.288-.744 0-1.032.744-.288 1.032 0 .288.744 0 1.032zM15.12 11.04c-.288.288-.744.288-1.032 0s-.288-.744 0-1.032.744-.288 1.032 0 .288.744 0 1.032zm-1.032-1.032c-.288.288-.744.288-1.032 0s-.288-.744 0-1.032.744-.288 1.032 0 .288.744 0 1.032zm2.112 0c-.288.288-.744.288-1.032 0s-.288-.744 0-1.032.744-.288 1.032 0 .288.744 0 1.032zm-1.032-1.032c-.288.288-.744.288-1.032 0s-.288-.744 0-1.032.744-.288 1.032 0 .288.744 0 1.032zM12 18H9v-3.5c0-1.38 1.12-2.5 2.5-2.5.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5c-.28 0-.5.22-.5.5V18zm0-8.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
                             </svg>
-                            <span class="text-sm tracking-wide" data-i18n="science.researchgate_btn"></span>
+                            <span class="text-sm tracking-wide" data-i18n="science.researchgate_btn">Publikationen auf ResearchGate</span>
                             <svg class="group-hover:translate-x-1 transition-transform" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                         </a>
                     </div>
@@ -266,8 +290,8 @@
                         <img src="img/science.jpg" alt="Science Focus" class="w-full h-full object-cover">
                     </div>
                     <div class="relative z-10">
-                        <h3 class="text-3xl font-heading font-black mb-6 tracking-tight" data-i18n="science.hab_title"></h3>
-                        <p class="text-blue-50 text-lg leading-relaxed font-medium" data-i18n="science.hab_desc"></p>
+                        <h3 class="text-3xl font-heading font-black mb-6 tracking-tight" data-i18n="science.hab_title">Habilitation Focus</h3>
+                        <p class="text-blue-50 text-lg leading-relaxed font-medium" data-i18n="science.hab_desc">Entwicklung molekularer Marker zur Vorhersage des Therapieansprechens bei Immuntherapien im fortgeschrittenen NSCLC.</p>
                     </div>
                 </div>
             </div>
@@ -278,7 +302,7 @@
     <section id="lectures" class="py-32 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-20">
-                <h2 class="text-4xl md:text-6xl font-heading font-black text-blue-950 mb-8 reveal" data-i18n="lectures.title"></h2>
+                <h2 class="text-4xl md:text-6xl font-heading font-black text-blue-950 mb-8 reveal" data-i18n="lectures.title">Vorträge & Advisory</h2>
                 <div class="w-20 h-2 bg-blue-600 mx-auto rounded-full reveal"></div>
             </div>
 
@@ -286,13 +310,13 @@
             <div class="max-w-5xl mx-auto mb-20 p-10 lg:p-16 bg-slate-50 rounded-[3rem] border border-slate-100 reveal">
                 <div class="flex flex-col md:flex-row gap-12 items-start">
                     <div class="w-full md:w-1/3">
-                        <span class="text-blue-600 font-black text-[10px] uppercase phi-tracking mb-4 block" data-i18n="lectures.advisory_tag"></span>
-                        <h3 class="text-2xl font-heading font-black text-slate-900 leading-tight" data-i18n="lectures.advisory_title"></h3>
+                        <span class="text-blue-600 font-black text-[10px] uppercase phi-tracking mb-4 block" data-i18n="lectures.advisory_tag">Wissenschaftlicher Austausch</span>
+                        <h3 class="text-2xl font-heading font-black text-slate-900 leading-tight" data-i18n="lectures.advisory_title">Expert Advisory für die Industrie</h3>
                     </div>
                     <div class="w-full md:w-2/3">
-                        <p class="text-slate-600 font-medium mb-6 leading-relaxed" data-i18n="lectures.advisory_desc"></p>
-                        <p class="text-slate-900 font-bold mb-4" data-i18n="lectures.advisory_partners"></p>
-                        <p class="text-slate-400 text-xs italic" data-i18n="lectures.advisory_note"></p>
+                        <p class="text-slate-600 font-medium mb-6 leading-relaxed" data-i18n="lectures.advisory_desc">Um den Transfer zwischen klinischer Forschung und medizinischer Praxis zu fördern, berät Dr. Romana Wass führende pharmazeutische Unternehmen in wissenschaftlichen Gremien. Dieser fachliche Austausch dient der Weiterentwicklung von Therapiestandards und der Implementierung neuester Studienergebnisse in den klinischen Alltag.</p>
+                        <p class="text-slate-900 font-bold mb-4" data-i18n="lectures.advisory_partners">Beispiele für Kooperationen (Advisory Boards & Vorträge): Roche, MSD, Astra Zeneca, Takeda.</p>
+                        <p class="text-slate-400 text-xs italic" data-i18n="lectures.advisory_note">Diese Tätigkeiten erfolgen im Rahmen des wissenschaftlichen Diskurses und stellen keine Bewerbung spezifischer pharmazeutischer Produkte dar.</p>
                     </div>
                 </div>
             </div>
@@ -328,9 +352,9 @@
                 <div class="absolute inset-0 opacity-[0.05] pointer-events-none">
                     <img src="img/consultation_bg.jpg" alt="Consultation Background" class="w-full h-full object-cover grayscale">
                 </div>
-                <h2 class="text-3xl md:text-5xl font-heading font-black text-blue-950 mb-8" data-i18n="consultation.title"></h2>
-                <p class="text-slate-500 text-xl leading-relaxed mb-12 font-medium" data-i18n="consultation.desc"></p>
-                <a href="#contact" class="inline-block bg-blue-950 text-white px-12 py-5 rounded-2xl font-bold hover:bg-blue-900 transition-all text-lg shadow-xl shadow-blue-200 relative z-10" data-i18n="consultation.cta"></a>
+                <h2 class="text-3xl md:text-5xl font-heading font-black text-blue-950 mb-8" data-i18n="consultation.title">Klinische Zweitmeinung</h2>
+                <p class="text-slate-500 text-xl leading-relaxed mb-12 font-medium" data-i18n="consultation.desc">Die onkologische Therapieplanung erfordert höchste Präzision. Ich biete fundierte Beratung und Zweitmeinungen basierend auf neuesten internationalen Leitlinien für Patienten und Angehörige.</p>
+                <a href="#contact" class="inline-block bg-blue-950 text-white px-12 py-5 rounded-2xl font-bold hover:bg-blue-900 transition-all text-lg shadow-xl shadow-blue-200 relative z-10" data-i18n="consultation.cta">Anfrage senden</a>
             </div>
         </div>
     </section>
@@ -339,16 +363,16 @@
     <section id="contact" class="py-32 bg-white">
         <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-20">
             <div class="reveal">
-                <h2 class="text-5xl md:text-7xl font-heading font-black text-blue-950 mb-10 tracking-tighter" data-i18n="contact.title"></h2>
-                <p class="text-slate-500 text-lg mb-10 font-medium leading-relaxed" data-i18n="contact.desc"></p>
+                <h2 class="text-5xl md:text-7xl font-heading font-black text-blue-950 mb-10 tracking-tighter" data-i18n="contact.title">Kontakt</h2>
+                <p class="text-slate-500 text-lg mb-10 font-medium leading-relaxed" data-i18n="contact.desc">Für Anfragen zu Advisory Boards, medizinischen Vorträgen oder klinischen Konsultationen.</p>
                 <div class="space-y-6">
                     <div class="flex items-start gap-4">
                         <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 shrink-0">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                         </div>
                         <div>
-                            <h4 class="font-bold text-slate-900" data-i18n="contact.location_title"></h4>
-                            <p class="text-slate-500 text-sm" data-i18n="contact.location_desc"></p>
+                            <h4 class="font-bold text-slate-900" data-i18n="contact.location_title">Dienstort</h4>
+                            <p class="text-slate-500 text-sm" data-i18n="contact.location_desc">JKU Universitätsklinikum Linz, Krankenhausstraße 9, 4020 Linz</p>
                         </div>
                     </div>
                 </div>
@@ -359,7 +383,7 @@
                     <input type="email" class="w-full bg-white border border-slate-200 px-6 py-4 rounded-xl outline-none focus:border-blue-500 transition-all" placeholder="E-Mail">
                 </div>
                 <textarea rows="5" class="w-full bg-white border border-slate-200 px-6 py-4 rounded-xl outline-none focus:border-blue-500 mb-6 transition-all" placeholder="Nachricht / Message"></textarea>
-                <button class="w-full bg-blue-900 text-white py-5 rounded-2xl font-bold hover:bg-blue-800 transition-all text-lg shadow-xl shadow-blue-200" data-i18n="contact.btn"></button>
+                <button class="w-full bg-blue-900 text-white py-5 rounded-2xl font-bold hover:bg-blue-800 transition-all text-lg shadow-xl shadow-blue-200" data-i18n="contact.btn">Anfrage absenden</button>
             </form>
         </div>
     </section>
@@ -369,10 +393,10 @@
         <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10">
             <div class="text-center md:text-left">
                 <div class="text-2xl font-heading font-black text-blue-950 tracking-tighter">Dr. Romana Wass<span class="text-blue-600">.</span></div>
-                <p class="text-[10px] font-black text-slate-400 uppercase phi-tracking mt-1" data-i18n="footer.tag"></p>
+                <p class="text-[10px] font-black text-slate-400 uppercase phi-tracking mt-1" data-i18n="footer.tag">Spitzenmedizin & Forschung</p>
             </div>
             <div class="flex space-x-8 items-center">
-                <button onclick="toggleModal()" class="text-[10px] font-black uppercase phi-tracking text-slate-500 hover:text-blue-600" data-i18n="footer.legal"></button>
+                <button onclick="toggleModal()" class="text-[10px] font-black uppercase phi-tracking text-slate-500 hover:text-blue-600" data-i18n="footer.legal">Impressum</button>
                 <div class="text-slate-300 text-[10px] font-bold uppercase phi-tracking">&copy; 2024 wass.at</div>
             </div>
         </div>
@@ -381,47 +405,50 @@
     <!-- Impressum Modal -->
     <div id="modal-overlay" class="hidden" onclick="if(event.target === this) toggleModal()">
         <div class="bg-white w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-3xl shadow-2xl p-10 relative">
-            <button onclick="toggleModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-900">
+            <button onclick="toggleModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-900 p-2">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
-            <h2 class="text-3xl font-heading font-bold text-blue-900 mb-8" data-i18n="impressum.title"></h2>
+            <h2 class="text-3xl font-heading font-bold text-blue-900 mb-8" data-i18n="impressum.title">Impressum</h2>
             
             <div class="space-y-8 text-slate-700 leading-relaxed text-sm">
                 <section>
-                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="impressum.owner_label"></h3>
-                    <p class="whitespace-pre-line" data-i18n="impressum.owner_text"></p>
+                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="impressum.owner_label">Medieninhaberin & Herausgeberin</h3>
+                    <p class="whitespace-pre-line" data-i18n="impressum.owner_text">Dr. Romana Wass, PhD
+Wohnort: Salzburg, Österreich
+Dienstort: JKU Universitätsklinikum Linz
+Krankenhausstraße 9, 4020 Linz</p>
                 </section>
                 <section>
-                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="impressum.subject_label"></h3>
-                    <p data-i18n="impressum.subject_text"></p>
+                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="impressum.subject_label">Unternehmensgegenstand</h3>
+                    <p data-i18n="impressum.subject_text">Ärztliche Tätigkeit (Fachärztin für Pneumologie)</p>
                 </section>
                 <section>
-                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="impressum.chamber_label"></h3>
-                    <p data-i18n="impressum.chamber_text"></p>
+                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="impressum.chamber_label">Zuständige Kammer</h3>
+                    <p data-i18n="impressum.chamber_text">Ärztekammer für Oberösterreich / Ärztekammer für Salzburg</p>
                 </section>
                 <section>
-                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="impressum.title_label"></h3>
-                    <p data-i18n="impressum.title_text"></p>
+                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="impressum.title_label">Berufsbezeichnung</h3>
+                    <p data-i18n="impressum.title_text">Fachärztin für Innere Medizin und Pneumologie (verliehen in Österreich)</p>
                 </section>
                 <section>
-                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="impressum.disclaimer_label"></h3>
-                    <p data-i18n="impressum.disclaimer_text"></p>
+                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="impressum.disclaimer_label">Haftungsausschluss</h3>
+                    <p data-i18n="impressum.disclaimer_text">Sämtliche Inhalte dienen lediglich der Information und stellen keine medizinische Beratung dar. Keine Haftung für externe Links.</p>
                 </section>
                 <section>
-                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="impressum.privacy_label"></h3>
-                    <p data-i18n="impressum.privacy_text"></p>
+                    <h3 class="font-bold text-slate-900 mb-2" data-i18n="impressum.privacy_label">Datenschutz</h3>
+                    <p data-i18n="impressum.privacy_text">Wir verwenden keine Tracking-Cookies. Personenbezogene Daten werden nur zur Beantwortung von Anfragen verarbeitet.</p>
                 </section>
             </div>
             
             <div class="mt-10 pt-6 border-t border-slate-100 flex justify-end">
-                <button onclick="toggleModal()" class="bg-slate-100 text-slate-700 px-6 py-2 rounded-lg font-bold hover:bg-slate-200 transition-all" data-i18n="impressum.close"></button>
+                <button onclick="toggleModal()" class="bg-slate-100 text-slate-700 px-6 py-2 rounded-lg font-bold hover:bg-slate-200 transition-all" data-i18n="impressum.close">Schließen</button>
             </div>
         </div>
     </div>
 
     <!-- Image Zoom Modal -->
     <div id="zoom-modal" class="hidden" onclick="closeZoom()">
-        <button onclick="closeZoom()" class="absolute top-8 right-8 text-white hover:text-blue-400 transition-colors z-[110]">
+        <button onclick="closeZoom()" class="absolute top-8 right-8 text-white hover:text-blue-400 transition-colors z-[110] p-2">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
         <img id="zoom-img" src="" alt="Zoomed View" onclick="event.stopPropagation()">
