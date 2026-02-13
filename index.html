@@ -23,12 +23,15 @@
             font-family: 'Montserrat', sans-serif; 
             letter-spacing: -0.015em; 
         }
-        /* Refined aspect ratio with fallback for older browsers */
+        
+        /* Fixed Aspect Ratio Class for Portrait Images */
         .phi-aspect-v { 
-            aspect-ratio: 1 / 1.25; 
+            aspect-ratio: 4 / 5; 
             width: 100%;
             height: auto;
+            position: relative;
         } 
+        
         .phi-tracking { letter-spacing: 0.1618em; }
         
         nav.scrolled {
@@ -65,9 +68,14 @@
         
         .whitespace-pre-line { white-space: pre-line; }
 
-        .portrait-frame {
-            position: relative;
-            mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+        /* Ensure images inside aspect-ratio boxes always cover properly */
+        .phi-aspect-v img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -129,25 +137,25 @@
     </div>
 
     <!-- Hero -->
-    <section class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-white">
-        <div class="absolute top-0 right-0 w-[45%] h-full bg-blue-50/40 hidden lg:block"></div>
-        <div class="container mx-auto px-6 grid lg:grid-cols-[55%_1fr] gap-12 items-center relative z-10">
-            <div class="reveal active py-16">
+    <section class="relative min-h-screen flex items-center pt-24 lg:pt-32 overflow-hidden bg-white">
+        <!-- Decoration side background -->
+        <div class="absolute top-0 right-0 w-full lg:w-[45%] h-full bg-blue-50/40 z-0"></div>
+        <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="reveal active py-10 lg:py-16">
                 <span class="inline-block px-5 py-2 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold uppercase phi-tracking mb-8 border border-blue-200" data-i18n="hero.role"></span>
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading font-black text-slate-900 leading-[1.05] mb-8" data-i18n="hero.title"></h1>
-                <p class="text-xl text-slate-500 mb-12 max-w-xl leading-relaxed font-medium" data-i18n="hero.sub"></p>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-black text-slate-900 leading-[1.1] mb-8" data-i18n="hero.title"></h1>
+                <p class="text-lg md:text-xl text-slate-500 mb-10 max-w-xl leading-relaxed font-medium" data-i18n="hero.sub"></p>
                 <div class="flex flex-wrap gap-5">
-                    <a href="#consultation" class="bg-blue-950 text-white px-12 py-5 rounded-2xl font-bold hover:bg-blue-900 transition-all shadow-2xl shadow-blue-200 flex items-center group">
+                    <a href="#consultation" class="bg-blue-950 text-white px-10 py-5 rounded-2xl font-bold hover:bg-blue-900 transition-all shadow-xl shadow-blue-200 flex items-center group">
                         <span data-i18n="hero.cta1"></span>
                         <svg class="ml-3 group-hover:translate-x-1 transition-transform" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                     </a>
-                    <a href="#lectures" class="bg-white border-2 border-slate-200 text-slate-700 px-12 py-5 rounded-2xl font-bold hover:border-blue-400 hover:text-blue-600 transition-all" data-i18n="hero.cta2"></a>
+                    <a href="#lectures" class="bg-white border-2 border-slate-200 text-slate-700 px-10 py-5 rounded-2xl font-bold hover:border-blue-400 hover:text-blue-600 transition-all" data-i18n="hero.cta2"></a>
                 </div>
             </div>
-            <!-- Ensured visibility on all screens, adjusting mobile placement -->
-            <div class="relative reveal active w-full lg:w-auto" style="transition-delay: 0.2s;">
-                <div class="phi-aspect-v w-full overflow-hidden rounded-[2.5rem] lg:rounded-t-[5rem] lg:rounded-b-none shadow-2xl relative border-8 border-white bg-slate-100">
-                    <img src="img/romana_wass.jpg" alt="Dr. Romana Wass, PhD" class="absolute inset-0 w-full h-full object-cover grayscale-[0.15] hover:grayscale-0 transition-all duration-1000">
+            <div class="relative reveal active w-full flex justify-center lg:justify-end" style="transition-delay: 0.2s;">
+                <div class="phi-aspect-v max-w-md lg:max-w-none w-full overflow-hidden rounded-[3rem] lg:rounded-t-[6rem] lg:rounded-b-none shadow-2xl border-8 border-white bg-slate-100">
+                    <img src="img/romana_wass.jpg" alt="Dr. Romana Wass, PhD" class="grayscale-[0.15] hover:grayscale-0 transition-all duration-1000">
                 </div>
             </div>
         </div>
@@ -161,31 +169,31 @@
                 <h2 class="text-4xl md:text-5xl font-heading font-black text-blue-950 mb-8" data-i18n="expertise.title"></h2>
                 <div class="w-20 h-2 bg-blue-600 mx-auto rounded-full"></div>
             </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-                <div class="p-12 bg-white rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition-all group reveal">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="p-10 bg-white rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition-all group reveal">
                     <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.8 2.3A.3.3 0 1 0 5 2a.3.3 0 0 0-.2.3Z"/><path d="M10 22v-2"/><path d="M7 11h.01"/><path d="M7 15h.01"/><path d="M11 11h.01"/><path d="M11 15h.01"/><path d="M15 11h.01"/><path d="M15 15h.01"/><path d="M19 11h.01"/><path d="M19 15h.01"/><path d="M2 21h20"/><path d="M4 21V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v17"/></svg>
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
                     </div>
                     <h3 class="text-2xl font-heading font-black mb-4 text-slate-900 tracking-tight" data-i18n="expertise.card1_title"></h3>
                     <p class="text-slate-500 text-sm leading-relaxed" data-i18n="expertise.card1_desc"></p>
                 </div>
-                <div class="p-12 bg-white rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition-all group reveal" style="transition-delay: 0.1s;">
+                <div class="p-10 bg-white rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition-all group reveal" style="transition-delay: 0.1s;">
                     <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v8"/><path d="M12 14v8"/><path d="M4.93 4.93l5.66 5.66"/><path d="M13.41 13.41l5.66 5.66"/><path d="M2 12h8"/><path d="M14 12h8"/><path d="M4.93 19.07l5.66-5.66"/><path d="M13.41 10.59l5.66-5.66"/></svg>
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>
                     </div>
                     <h3 class="text-2xl font-heading font-black mb-4 text-slate-900 tracking-tight" data-i18n="expertise.card2_title"></h3>
                     <p class="text-slate-500 text-sm leading-relaxed" data-i18n="expertise.card2_desc"></p>
                 </div>
-                <div class="p-12 bg-white rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition-all group reveal" style="transition-delay: 0.2s;">
+                <div class="p-10 bg-white rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition-all group reveal" style="transition-delay: 0.2s;">
                     <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                     </div>
                     <h3 class="text-2xl font-heading font-black mb-4 text-slate-900 tracking-tight" data-i18n="expertise.card3_title"></h3>
                     <p class="text-slate-500 text-sm leading-relaxed" data-i18n="expertise.card3_desc"></p>
                 </div>
-                <div class="p-12 bg-white rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition-all group reveal" style="transition-delay: 0.3s;">
+                <div class="p-10 bg-white rounded-[2.5rem] border border-slate-100 hover:shadow-2xl transition-all group reveal" style="transition-delay: 0.3s;">
                     <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-8 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                     </div>
                     <h3 class="text-2xl font-heading font-black mb-4 text-slate-900 tracking-tight" data-i18n="expertise.card4_title"></h3>
                     <p class="text-slate-500 text-sm leading-relaxed" data-i18n="expertise.card4_desc"></p>
@@ -199,7 +207,7 @@
         <div class="container mx-auto px-6">
             <div class="flex flex-col lg:flex-row gap-20 items-center">
                 <div class="w-full lg:w-[61.8%] reveal">
-                    <h2 class="text-4xl md:text-5xl font-heading font-black text-blue-950 mb-10 leading-tight italic" data-i18n="about.quote"></h2>
+                    <h2 class="text-3xl md:text-5xl font-heading font-black text-blue-950 mb-10 leading-tight italic" data-i18n="about.quote"></h2>
                     <div class="space-y-8 text-slate-600 text-lg leading-relaxed font-medium">
                         <p data-i18n="about.p1"></p>
                         <p data-i18n="about.p2"></p>
@@ -215,7 +223,7 @@
                 </div>
                 <div class="w-full lg:w-[38.2%] reveal" style="transition-delay: 0.2s;">
                     <div class="phi-aspect-v relative rounded-[3rem] overflow-hidden shadow-2xl border-4 border-slate-50 bg-slate-100">
-                        <img src="img/romana_wass.jpg" alt="Dr. Romana Wass Profile" class="absolute inset-0 w-full h-full object-cover">
+                        <img src="img/romana_wass.jpg" alt="Dr. Romana Wass Profile">
                     </div>
                 </div>
             </div>
@@ -255,7 +263,7 @@
                 
                 <div class="bg-blue-600 p-12 rounded-[3rem] shadow-2xl relative overflow-hidden flex flex-col justify-between group reveal" style="transition-delay: 0.2s;">
                     <div class="absolute inset-0 opacity-20 transition-transform duration-[15s] group-hover:scale-110">
-                        <img src="img/science.jpg" alt="Laboratory Genetics" class="w-full h-full object-cover">
+                        <img src="img/science.jpg" alt="Science Focus" class="w-full h-full object-cover">
                     </div>
                     <div class="relative z-10">
                         <h3 class="text-3xl font-heading font-black mb-6 tracking-tight" data-i18n="science.hab_title"></h3>
@@ -275,7 +283,7 @@
             </div>
 
             <!-- Advisory Info Block -->
-            <div class="max-w-5xl mx-auto mb-20 p-12 bg-slate-50 rounded-[3rem] border border-slate-100 reveal">
+            <div class="max-w-5xl mx-auto mb-20 p-10 lg:p-16 bg-slate-50 rounded-[3rem] border border-slate-100 reveal">
                 <div class="flex flex-col md:flex-row gap-12 items-start">
                     <div class="w-full md:w-1/3">
                         <span class="text-blue-600 font-black text-[10px] uppercase phi-tracking mb-4 block" data-i18n="lectures.advisory_tag"></span>
@@ -291,19 +299,19 @@
 
             <!-- Grid of Images/Lectures -->
             <div class="grid md:grid-cols-3 gap-10">
-                <div class="relative rounded-[2.5rem] overflow-hidden aspect-[1.618/1] shadow-xl reveal group cursor-zoom-in" onclick="openZoom('img/lecture1.jpg')">
+                <div class="relative rounded-[2.5rem] overflow-hidden aspect-[1.6/1] shadow-xl reveal group cursor-zoom-in" onclick="openZoom('img/lecture1.jpg')">
                     <img src="img/lecture1.jpg" alt="Clinical Update" class="absolute inset-0 w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105">
                     <div class="absolute inset-0 bg-gradient-to-t from-blue-950/90 to-transparent flex items-end p-8">
                         <h5 class="text-white font-bold text-left text-lg">ÖGP Jahrestagung 2023</h5>
                     </div>
                 </div>
-                <div class="relative rounded-[2.5rem] overflow-hidden aspect-[1.618/1] shadow-xl reveal group cursor-zoom-in" style="transition-delay: 0.1s;" onclick="openZoom('img/lecture2.jpg')">
+                <div class="relative rounded-[2.5rem] overflow-hidden aspect-[1.6/1] shadow-xl reveal group cursor-zoom-in" style="transition-delay: 0.1s;" onclick="openZoom('img/lecture2.jpg')">
                     <img src="img/lecture2.jpg" alt="Lab Research" class="absolute inset-0 w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105">
                     <div class="absolute inset-0 bg-gradient-to-t from-blue-950/90 to-transparent flex items-end p-8">
                         <h5 class="text-white font-bold text-left text-lg">Immunonkologie Update</h5>
                     </div>
                 </div>
-                <div class="relative rounded-[2.5rem] overflow-hidden aspect-[1.618/1] shadow-xl reveal group cursor-zoom-in" style="transition-delay: 0.2s;" onclick="openZoom('img/lecture3.jpg')">
+                <div class="relative rounded-[2.5rem] overflow-hidden aspect-[1.6/1] shadow-xl reveal group cursor-zoom-in" style="transition-delay: 0.2s;" onclick="openZoom('img/lecture3.jpg')">
                     <img src="img/lecture3.jpg" alt="Research Presentation" class="absolute inset-0 w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105">
                     <div class="absolute inset-0 bg-gradient-to-t from-blue-950/90 to-transparent flex items-end p-8">
                         <h5 class="text-white font-bold text-left text-lg">Biomarker Keynote</h5>
@@ -316,9 +324,9 @@
     <!-- Consultation Section -->
     <section id="consultation" class="py-32 bg-blue-50">
         <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto bg-white rounded-[3rem] shadow-2xl p-16 md:p-24 text-center border border-slate-100 relative overflow-hidden reveal">
+            <div class="max-w-4xl mx-auto bg-white rounded-[3rem] shadow-2xl p-12 md:p-24 text-center border border-slate-100 relative overflow-hidden reveal">
                 <div class="absolute inset-0 opacity-[0.05] pointer-events-none">
-                    <img src="img/consultation_bg.jpg" alt="Clinical Setting Background" class="w-full h-full object-cover grayscale">
+                    <img src="img/consultation_bg.jpg" alt="Consultation Background" class="w-full h-full object-cover grayscale">
                 </div>
                 <h2 class="text-3xl md:text-5xl font-heading font-black text-blue-950 mb-8" data-i18n="consultation.title"></h2>
                 <p class="text-slate-500 text-xl leading-relaxed mb-12 font-medium" data-i18n="consultation.desc"></p>
@@ -345,7 +353,7 @@
                     </div>
                 </div>
             </div>
-            <form class="bg-slate-50 p-12 rounded-[2.5rem] border border-slate-100 reveal" onsubmit="event.preventDefault(); alert('Sent / Gesendet');">
+            <form class="bg-slate-50 p-10 lg:p-12 rounded-[2.5rem] border border-slate-100 reveal" onsubmit="event.preventDefault(); alert('Sent / Gesendet');">
                 <div class="grid sm:grid-cols-2 gap-6 mb-6">
                     <input type="text" class="w-full bg-white border border-slate-200 px-6 py-4 rounded-xl outline-none focus:border-blue-500 transition-all" placeholder="Name">
                     <input type="email" class="w-full bg-white border border-slate-200 px-6 py-4 rounded-xl outline-none focus:border-blue-500 transition-all" placeholder="E-Mail">
@@ -419,7 +427,5 @@
         <img id="zoom-img" src="" alt="Zoomed View" onclick="event.stopPropagation()">
     </div>
 
-    <!-- Classical Script Import -->
-    <script src="index.js"></script>
 </body>
 </html>
