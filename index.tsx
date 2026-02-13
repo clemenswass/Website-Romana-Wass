@@ -171,14 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if ((e as KeyboardEvent).key === 'Enter') sendAIMessage();
     });
 
-    // Handle Escape Key for Modals
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            const modal = document.getElementById('modal-overlay');
-            if (modal && !modal.classList.contains('hidden')) toggleModal();
-        }
-    });
-
     // Final reveal check
     setTimeout(handleReveal, 500);
 });
