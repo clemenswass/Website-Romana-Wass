@@ -349,7 +349,7 @@
         </div>
     </footer>
 
-    <!-- Impressum Modal (Manual HTML Version) -->
+    <!-- Impressum Modal -->
     <div id="modal-overlay" class="hidden" onclick="if(event.target === this) toggleModal()">
         <div class="bg-white w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-3xl shadow-2xl p-10 relative">
             <button onclick="toggleModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-900">
@@ -390,76 +390,7 @@
         </div>
     </div>
 
-    <script>
-        let translations = {};
-        let currentLang = 'de';
-
-        async function loadTranslations(lang) {
-            try {
-                const response = await fetch(`${lang}.json`);
-                translations = await response.json();
-                currentLang = lang;
-                applyTranslations();
-                updateUI();
-            } catch (error) {
-                console.error('Translation loading failed:', error);
-                document.getElementById('app-body').classList.remove('loading');
-                document.getElementById('app-body').classList.add('loaded');
-            }
-        }
-
-        function applyTranslations() {
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                const value = key.split('.').reduce((obj, k) => (obj || {})[k], translations);
-                if (value) el.innerText = value;
-            });
-            document.getElementById('app-body').classList.remove('loading');
-            document.getElementById('app-body').classList.add('loaded');
-        }
-
-        function switchLanguage() {
-            const next = currentLang === 'de' ? 'en' : 'de';
-            loadTranslations(next);
-        }
-
-        function updateUI() {
-            document.getElementById('lang-toggle-label').innerText = currentLang === 'de' ? 'EN' : 'DE';
-            document.getElementById('mobile-lang-label').innerText = currentLang === 'de' ? 'English' : 'Deutsch';
-            document.documentElement.lang = currentLang;
-        }
-
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('translate-x-full');
-            document.body.classList.toggle('overflow-hidden');
-        }
-
-        function toggleModal() {
-            document.getElementById('modal-overlay').classList.toggle('hidden');
-            document.body.classList.toggle('overflow-hidden');
-        }
-
-        function handleReveal() {
-            document.querySelectorAll('.reveal').forEach(el => {
-                const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight - 100) el.classList.add('active');
-            });
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const browserLang = navigator.language.startsWith('en') ? 'en' : 'de';
-            loadTranslations(browserLang);
-            
-            window.addEventListener('scroll', () => {
-                const nav = document.getElementById('main-nav');
-                if (window.scrollY > 60) nav.classList.add('scrolled');
-                else nav.classList.remove('scrolled');
-                handleReveal();
-            });
-
-            setTimeout(handleReveal, 100);
-        });
-    </script>
+    <!-- Classical Script Import -->
+    <script src="index.js"></script>
 </body>
 </html>
