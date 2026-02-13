@@ -1,4 +1,3 @@
-// Adding export {} to mark this file as a module, preventing global scope naming conflicts
 export {};
 
 let translations: Record<string, any> = {};
@@ -8,17 +7,17 @@ async function loadTranslations(lang: string) {
     const body = document.getElementById('app-body');
     try {
         const response = await fetch(`${lang}.json`);
-        if (!response.ok) throw new Error('Network response was not ok');
+        if (!response.ok) throw new Error('Translation fetch failed');
         translations = await response.json();
         currentLang = lang;
         applyTranslations();
-        updateUI();
     } catch (error) {
-        console.warn(`Translation loading for ${lang} failed, using existing or default:`, error);
-        // Ensure UI is visible even if fetch fails (e.g. Brave Shields block)
-        body?.classList.remove('loading');
-        body?.classList.add('loaded');
-        handleReveal(); // Trigger initial reveal
+        console.warn(`Could not load ${lang}.json. Falling back to HTML defaults.`);
+    } finally {
+        // Essential: make page visible even if JS or JSON fails
+        body?.classList.remove('no-js');
+        updateUI();
+        handleReveal();
     }
 }
 
@@ -37,9 +36,6 @@ function applyTranslations() {
             }
         }
     });
-    const body = document.getElementById('app-body');
-    body?.classList.remove('loading');
-    body?.classList.add('loaded');
 }
 
 function switchLanguage() {
@@ -67,17 +63,6 @@ function toggleModal() {
     document.body.classList.toggle('overflow-hidden');
 }
 
-function openZoom(src: string) {
-    const modal = document.getElementById('zoom-modal');
-    const img = document.getElementById('zoom-img') as HTMLImageElement;
-    if (img) img.src = src;
-    modal?.classList.remove('hidden');
-    document.body.classList.add('overflow-hidden');
-    setTimeout(() => {
-        modal?.classList.add('active');
-    }, 10);
-}
-
 function closeZoom() {
     const modal = document.getElementById('zoom-modal');
     modal?.classList.remove('active');
@@ -90,23 +75,23 @@ function closeZoom() {
 function handleReveal() {
     document.querySelectorAll('.reveal').forEach(el => {
         const rect = el.getBoundingClientRect();
-        const triggerPoint = window.innerHeight * 0.95; // More lenient for mobile
-        if (rect.top < triggerPoint) el.classList.add('active');
+        // More generous trigger point for mobile reliability
+        if (rect.top < window.innerHeight * 0.95) el.classList.add('active');
     });
 }
 
-// Global exposure for HTML onclick handlers
+// Attach to window for HTML event handlers
 (window as any).switchLanguage = switchLanguage;
 (window as any).toggleMobileMenu = toggleMobileMenu;
 (window as any).toggleModal = toggleModal;
-(window as any).openZoom = openZoom;
 (window as any).closeZoom = closeZoom;
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Determine language based on browser or default to German
     const browserLang = navigator.language.startsWith('en') ? 'en' : 'de';
     loadTranslations(browserLang);
     
-    // Throttled scroll listener
+    // Smooth scroll reveal listener
     let scrollTimeout: number | null = null;
     window.addEventListener('scroll', () => {
         const nav = document.getElementById('main-nav');
@@ -124,17 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, { passive: true });
 
-    // Handle escape key to close modals
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeZoom();
-            const modalOverlay = document.getElementById('modal-overlay');
-            if (modalOverlay && !modalOverlay.classList.contains('hidden')) {
-                toggleModal();
-            }
-        }
-    });
-
-    // Initial trigger
-    setTimeout(handleReveal, 300);
+    // Initial check
+    setTimeout(handleReveal, 500);
 });
