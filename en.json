@@ -4,7 +4,7 @@
     "about": "About",
     "expertise": "Expertise",
     "science": "Science",
-    "lectures": "Lectures",
+    "lectures": "Lectures & Advisory",
     "consultation": "Second Opinion",
     "contact": "Contact"
   },
@@ -13,7 +13,7 @@
     "title": "Dr. Romana Wass, PhD",
     "sub": "Specialist in Pulmonology with a focus on Oncology. Individual high-end medicine meets academic excellence at JKU University Hospital Linz.",
     "cta1": "Request Second Opinion",
-    "cta2": "Lectures & Boards"
+    "cta2": "Lectures & Advisory"
   },
   "expertise": {
     "tag": "Medical Specializations",
@@ -40,6 +40,14 @@
     "hab_title": "Habilitation Focus",
     "hab_desc": "Development of molecular markers to predict therapeutic response to immunotherapies in advanced NSCLC.",
     "researchgate_btn": "Publications on ResearchGate"
+  },
+  "lectures": {
+    "title": "Lectures & Advisory",
+    "advisory_tag": "Scientific Exchange",
+    "advisory_title": "Expert Advisory for Industry",
+    "advisory_desc": "To foster the transfer between clinical research and medical practice, Dr. Romana Wass advises leading pharmaceutical companies in scientific committees. This professional exchange serves the further development of therapeutic standards and the implementation of the latest clinical trial results into daily practice.",
+    "advisory_partners": "Examples of collaborations (Advisory Boards & Lectures): Roche, MSD, Astra Zeneca, Takeda.",
+    "advisory_note": "These activities are conducted as part of scientific discourse and do not constitute an endorsement of specific pharmaceutical products."
   },
   "consultation": {
     "title": "Clinical Second Opinion",

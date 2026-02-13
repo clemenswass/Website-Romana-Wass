@@ -4,7 +4,7 @@
     "about": "Über mich",
     "expertise": "Expertise",
     "science": "Wissenschaft",
-    "lectures": "Vorträge",
+    "lectures": "Vorträge & Advisory",
     "consultation": "Zweitmeinung",
     "contact": "Kontakt"
   },
@@ -13,7 +13,7 @@
     "title": "Dr. Romana Wass, PhD",
     "sub": "Spezialistin für Lungenheilkunde mit Schwerpunkt Onkologie. Individuelle Spitzenmedizin trifft auf akademische Exzellenz am JKU Universitätsklinikum Linz.",
     "cta1": "Zweitmeinung anfragen",
-    "cta2": "Vorträge & Boards"
+    "cta2": "Vorträge & Advisory"
   },
   "expertise": {
     "tag": "Medizinische Fachbereiche",
@@ -40,6 +40,14 @@
     "hab_title": "Habilitation Focus",
     "hab_desc": "Entwicklung molekularer Marker zur Vorhersage des Therapieansprechens bei Immuntherapien im fortgeschrittenen NSCLC.",
     "researchgate_btn": "Publikationen auf ResearchGate"
+  },
+  "lectures": {
+    "title": "Vorträge & Advisory",
+    "advisory_tag": "Wissenschaftlicher Austausch",
+    "advisory_title": "Expert Advisory für die Industrie",
+    "advisory_desc": "Um den Transfer zwischen klinischer Forschung und medizinischer Praxis zu fördern, berät Dr. Romana Wass führende pharmazeutische Unternehmen in wissenschaftlichen Gremien. Dieser fachliche Austausch dient der Weiterentwicklung von Therapiestandards und der Implementierung neuester Studienergebnisse in den klinischen Alltag.",
+    "advisory_partners": "Beispiele für Kooperationen (Advisory Boards & Vorträge): Roche, MSD, Astra Zeneca, Takeda.",
+    "advisory_note": "Diese Tätigkeiten erfolgen im Rahmen des wissenschaftlichen Diskurses und stellen keine Bewerbung spezifischer pharmazeutischer Produkte dar."
   },
   "consultation": {
     "title": "Klinische Zweitmeinung",
