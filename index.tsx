@@ -1,20 +1,24 @@
+import { GoogleGenAI } from "@google/genai";
+
 export {};
 
 let translations: Record<string, any> = {};
 let currentLang = 'de';
 
+// --- Translation Engine ---
 async function loadTranslations(lang: string) {
     const body = document.getElementById('app-body');
     try {
+        // Strict relative path for GitHub Pages
         const response = await fetch(`${lang}.json`);
-        if (!response.ok) throw new Error('Translation fetch failed');
+        if (!response.ok) throw new Error('Translation not found');
         translations = await response.json();
         currentLang = lang;
         applyTranslations();
     } catch (error) {
-        console.warn(`Could not load ${lang}.json. Falling back to HTML defaults.`);
+        console.warn(`Translation load for ${lang} failed. Site remains functional in German.`);
     } finally {
-        // Essential: make page visible even if JS or JSON fails
+        // Ensure site is visible even if fetch fails
         body?.classList.remove('no-js');
         updateUI();
         handleReveal();
@@ -51,6 +55,7 @@ function updateUI() {
     document.documentElement.lang = currentLang;
 }
 
+// --- UI Utilities ---
 function toggleMobileMenu() {
     const menu = document.getElementById('mobile-menu');
     menu?.classList.toggle('translate-x-full');
@@ -63,35 +68,86 @@ function toggleModal() {
     document.body.classList.toggle('overflow-hidden');
 }
 
-function closeZoom() {
-    const modal = document.getElementById('zoom-modal');
-    modal?.classList.remove('active');
-    setTimeout(() => {
-        modal?.classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
-    }, 400);
-}
-
 function handleReveal() {
-    document.querySelectorAll('.reveal').forEach(el => {
+    const revealElements = document.querySelectorAll('.reveal');
+    revealElements.forEach(el => {
         const rect = el.getBoundingClientRect();
-        // More generous trigger point for mobile reliability
-        if (rect.top < window.innerHeight * 0.95) el.classList.add('active');
+        // Trigger slightly earlier for better feel
+        if (rect.top < window.innerHeight * 0.92) {
+            el.classList.add('active');
+        }
     });
 }
 
-// Attach to window for HTML event handlers
+// --- AI Oncology Assistant (Gemini) ---
+function toggleAIChat() {
+    const chat = document.getElementById('ai-chat-window');
+    chat?.classList.toggle('hidden');
+}
+
+async function sendAIMessage() {
+    const inputEl = document.getElementById('ai-input') as HTMLInputElement;
+    const chatContainer = document.getElementById('chat-messages');
+    const prompt = inputEl.value.trim();
+    
+    if (!prompt || !chatContainer) return;
+
+    // 1. Add User Message UI
+    const userBubble = document.createElement('div');
+    userBubble.className = 'chat-bubble chat-user';
+    userBubble.innerText = prompt;
+    chatContainer.appendChild(userBubble);
+    inputEl.value = '';
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    // 2. Add Loading Indicator
+    const botBubble = document.createElement('div');
+    botBubble.className = 'chat-bubble chat-bot italic animate-pulse';
+    botBubble.innerText = currentLang === 'de' ? 'Überlege...' : 'Thinking...';
+    chatContainer.appendChild(botBubble);
+
+    try {
+        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || "" });
+        const response = await ai.models.generateContent({
+            model: 'gemini-3-flash-preview',
+            contents: prompt,
+            config: {
+                systemInstruction: `You are an AI medical assistant for the website of Dr. Romana Wass, PhD, a specialist in pulmonary medicine and oncology. 
+                Your tone is professional, empathetic, and scientifically accurate but accessible. 
+                Answer general questions about lung cancer, precision medicine, and the doctor's areas of expertise.
+                CRITICAL: Always include a disclaimer that you are an AI and your answers do not replace a consultation with a human doctor.
+                Keep answers concise. Language: ${currentLang === 'de' ? 'German' : 'English'}.`,
+                temperature: 0.7,
+            }
+        });
+
+        const text = response.text || (currentLang === 'de' ? 'Keine Antwort erhalten.' : 'No response received.');
+        botBubble.classList.remove('italic', 'animate-pulse');
+        botBubble.innerText = text;
+
+    } catch (error) {
+        console.error('Gemini Error:', error);
+        botBubble.innerText = currentLang === 'de' ? 'Dienst momentan nicht verfügbar.' : 'Service temporarily unavailable.';
+        botBubble.classList.remove('animate-pulse');
+    }
+    
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+// --- Global Exposure for HTML ---
 (window as any).switchLanguage = switchLanguage;
 (window as any).toggleMobileMenu = toggleMobileMenu;
 (window as any).toggleModal = toggleModal;
-(window as any).closeZoom = closeZoom;
+(window as any).toggleAIChat = toggleAIChat;
+(window as any).sendAIMessage = sendAIMessage;
 
+// --- Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Determine language based on browser or default to German
+    // Determine initial language
     const browserLang = navigator.language.startsWith('en') ? 'en' : 'de';
     loadTranslations(browserLang);
     
-    // Smooth scroll reveal listener
+    // Throttled scroll listener
     let scrollTimeout: number | null = null;
     window.addEventListener('scroll', () => {
         const nav = document.getElementById('main-nav');
@@ -109,6 +165,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, { passive: true });
 
-    // Initial check
+    // AI Input Enter Key
+    const aiInput = document.getElementById('ai-input');
+    aiInput?.addEventListener('keypress', (e) => {
+        if ((e as KeyboardEvent).key === 'Enter') sendAIMessage();
+    });
+
+    // Final reveal check
     setTimeout(handleReveal, 500);
 });
