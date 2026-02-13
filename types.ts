@@ -1,4 +1,6 @@
 
+export type Language = 'de' | 'en';
+
 export interface NavItem {
   label: string;
   href: string;
@@ -15,14 +17,14 @@ export interface Lecture {
   title: string;
   event: string;
   date: string;
-  type: 'Advisory Board' | 'Vortrag' | 'Keynote';
+  type: string;
   image?: string;
 }
 
 export interface MediaLink {
   title: string;
   platform: string;
-  type: 'Video' | 'Podcast' | 'Interview' | 'Print';
+  type: string;
   link: string;
   date: string;
 }
