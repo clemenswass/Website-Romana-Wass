@@ -71,21 +71,22 @@
                     <a href="#expertise" class="hover:text-blue-600 transition-colors" data-i18n="nav.expertise"></a>
                     <a href="#science" class="hover:text-blue-600 transition-colors" data-i18n="nav.science"></a>
                     <a href="#lectures" class="hover:text-blue-600 transition-colors" data-i18n="nav.lectures"></a>
-                    <a href="#consultation" class="text-blue-700 font-extrabold hover:text-blue-900 transition-all" data-i18n="nav.consultation"></a>
+                    <a href="#consultation" class="hover:text-blue-600 transition-colors" data-i18n="nav.consultation"></a>
+                    <a href="#contact" class="text-blue-700 font-extrabold hover:text-blue-900 transition-all" data-i18n="nav.contact"></a>
                 </div>
                 
-                <button onclick="switchLanguage()" class="flex items-center space-x-2 text-[0.75rem] font-bold uppercase tracking-widest px-4 py-2 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors border border-slate-200">
+                <button onclick="switchLanguage()" aria-label="Switch Language" class="flex items-center space-x-2 text-[0.75rem] font-bold uppercase tracking-widest px-4 py-2 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors border border-slate-200">
                     <span id="lang-toggle-label">EN</span>
                 </button>
 
                 <div class="flex items-center space-x-4 border-l border-slate-200 pl-8">
-                    <a href="https://www.linkedin.com/in/romana-wass/" target="_blank" class="text-slate-400 hover:text-blue-600 transition-all">
+                    <a href="https://www.linkedin.com/in/romana-wass/" target="_blank" rel="noopener" class="text-slate-400 hover:text-blue-600 transition-all">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                     </a>
                 </div>
             </div>
 
-            <button class="lg:hidden text-slate-900 p-2" onclick="toggleMobileMenu()">
+            <button class="lg:hidden text-slate-900 p-2" onclick="toggleMobileMenu()" aria-label="Open Mobile Menu">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
             </button>
         </div>
@@ -93,7 +94,7 @@
 
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="fixed inset-0 bg-white z-[60] translate-x-full transition-transform duration-500 flex flex-col p-10 pt-32 space-y-8 text-2xl font-bold">
-        <button class="absolute top-8 right-8" onclick="toggleMobileMenu()">
+        <button class="absolute top-8 right-8" onclick="toggleMobileMenu()" aria-label="Close Mobile Menu">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
         <a href="#about" onclick="toggleMobileMenu()" data-i18n="nav.about"></a>
@@ -101,6 +102,7 @@
         <a href="#science" onclick="toggleMobileMenu()" data-i18n="nav.science"></a>
         <a href="#lectures" onclick="toggleMobileMenu()" data-i18n="nav.lectures"></a>
         <a href="#consultation" onclick="toggleMobileMenu()" data-i18n="nav.consultation"></a>
+        <a href="#contact" onclick="toggleMobileMenu()" data-i18n="nav.contact"></a>
         <div class="pt-8 border-t border-slate-100">
             <button onclick="switchLanguage(); toggleMobileMenu()" class="text-blue-600 font-bold" id="mobile-lang-label">English</button>
         </div>
@@ -202,8 +204,10 @@
     <!-- Science -->
     <section id="science" class="py-32 bg-slate-900 text-white">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl md:text-7xl font-heading font-black mb-12 tracking-tight reveal" data-i18n="science.title"></h2>
-            <div class="grid lg:grid-cols-2 gap-12">
+            <h2 class="text-4xl md:text-7xl font-heading font-black mb-4 tracking-tight reveal" data-i18n="science.title"></h2>
+            <p class="text-blue-400 text-lg mb-12 max-w-2xl reveal" data-i18n="science.sub"></p>
+            
+            <div class="grid lg:grid-cols-2 gap-12 mt-12">
                 <div class="space-y-6 reveal">
                     <div class="p-8 bg-white/5 border border-white/5 rounded-3xl">
                         <span class="text-2xl font-black text-blue-500/40 block mb-2">2024</span>
@@ -218,7 +222,7 @@
                     
                     <!-- ResearchGate Link Integration -->
                     <div class="pt-6">
-                        <a href="https://www.researchgate.net/scientific-contributions/Romana-Wass-2138239998" target="_blank" class="inline-flex items-center space-x-3 px-8 py-4 bg-white/5 border border-white/10 rounded-2xl font-bold hover:bg-white/10 hover:border-blue-500/50 transition-all group">
+                        <a href="https://www.researchgate.net/scientific-contributions/Romana-Wass-2138239998" target="_blank" rel="noopener" class="inline-flex items-center space-x-3 px-8 py-4 bg-white/5 border border-white/10 rounded-2xl font-bold hover:bg-white/10 hover:border-blue-500/50 transition-all group">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-blue-500">
                                 <path d="M19.344 11.232c-.048-.048-.12-.048-.168 0-.048.048-.048.12 0 .168.048.048.12.048.168 0 .048-.048.048-.12 0-.168zm-.12 1.296c-.048-.048-.12-.048-.168 0-.048.048-.048.12 0 .168.048.048.12.048.168 0 .048-.048.048-.12 0-.168zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm6.216 13.92c-.288.288-.744.288-1.032 0s-.288-.744 0-1.032.744-.288 1.032 0 .288.744 0 1.032zm-1.032-2.16c-.288.288-.744.288-1.032 0s-.288-.744 0-1.032.744-.288 1.032 0 .288.744 0 1.032zm1.032-1.032c-.288.288-.744.288-1.032 0s-.288-.744 0-1.032.744-.288 1.032 0 .288.744 0 1.032zM15.12 11.04c-.288.288-.744.288-1.032 0s-.288-.744 0-1.032.744-.288 1.032 0 .288.744 0 1.032zm-1.032-1.032c-.288.288-.744.288-1.032 0s-.288-.744 0-1.032.744-.288 1.032 0 .288.744 0 1.032zm2.112 0c-.288.288-.744.288-1.032 0s-.288-.744 0-1.032.744-.288 1.032 0 .288.744 0 1.032zm-1.032-1.032c-.288.288-.744.288-1.032 0s-.288-.744 0-1.032.744-.288 1.032 0 .288.744 0 1.032zM12 18H9v-3.5c0-1.38 1.12-2.5 2.5-2.5.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5c-.28 0-.5.22-.5.5V18zm0-8.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
                             </svg>
