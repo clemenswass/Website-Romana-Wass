@@ -97,13 +97,14 @@
     </nav>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 bg-white z-[60] translate-x-full transition-transform duration-500 flex flex-col p-10 pt-32 space-y-8 text-2xl font-bold">
+    <div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-xl z-[60] translate-x-full transition-transform duration-500 flex flex-col p-10 pt-32 space-y-8 text-2xl font-bold">
         <button class="absolute top-8 right-8 p-4 text-blue-950" onclick="window.toggleMobileMenu()">✕</button>
         <a href="#about" onclick="window.toggleMobileMenu()" data-i18n="nav.about">Über mich</a>
         <a href="#expertise" onclick="window.toggleMobileMenu()" data-i18n="nav.expertise">Expertise</a>
         <a href="#science" onclick="window.toggleMobileMenu()" data-i18n="nav.science">Wissenschaft</a>
+        <a href="#consultation" onclick="window.toggleMobileMenu()" data-i18n="nav.consultation">Zweitmeinung</a>
         <a href="#contact" onclick="window.toggleMobileMenu()" data-i18n="nav.contact">Kontakt</a>
-        <div class="pt-8 border-t border-slate-100">
+        <div class="pt-8 border-t border-slate-200">
             <button onclick="window.switchLanguage(); window.toggleMobileMenu()" class="text-blue-600 text-left" id="mobile-lang-label">English</button>
         </div>
     </div>
@@ -126,6 +127,35 @@
             <div class="relative reveal active w-full flex justify-center lg:justify-end">
                 <div class="phi-aspect-v max-w-md w-full rounded-[3rem] shadow-2xl border-8 border-white">
                     <img src="https://placehold.co/800x1000/0f172a/ffffff?text=Dr.+Romana+Wass" alt="Dr. Romana Wass, PhD">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 bg-white">
+        <div class="container mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
+            <div class="reveal">
+                <h2 class="text-4xl md:text-5xl font-heading font-black text-blue-950 mb-8" data-i18n="nav.about">Über mich</h2>
+                <p class="text-xl md:text-2xl text-slate-700 italic font-medium mb-10 border-l-4 border-blue-600 pl-6" data-i18n="about.quote">"Wissenschaftlicher Fortschritt ist dann wertvoll, wenn er unmittelbar beim Patienten ankommt."</p>
+                <div class="space-y-6 text-slate-600 leading-relaxed">
+                    <p data-i18n="about.p1">Als Oberärztin am JKU Universitätsklinikum Linz verbinde ich klinische Exzellenz mit akademischer Forschung. Mein Fokus liegt auf der Optimierung der onkologischen Behandlungspfade.</p>
+                    <p data-i18n="about.p2">Mein Ziel ist die Erlangung der Habilitation, um neue Standards in der pneumologischen Lehre und Forschung zu setzen.</p>
+                </div>
+                <div class="mt-12 flex flex-wrap gap-4">
+                    <div class="bg-blue-50 px-6 py-3 rounded-xl flex items-center gap-3 text-blue-800 font-bold text-sm">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                        <span data-i18n="about.label1">Habilitationskandidatin JKU</span>
+                    </div>
+                    <div class="bg-slate-50 px-6 py-3 rounded-xl flex items-center gap-3 text-slate-800 font-bold text-sm">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        <span data-i18n="about.label2">Akademische Lehre</span>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal">
+                <div class="phi-aspect-v rounded-[3rem] shadow-xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
+                    <img src="https://placehold.co/800x1000/334155/ffffff?text=Academic+Profile" alt="Dr. Wass Academic Profile">
                 </div>
             </div>
         </div>
@@ -171,6 +201,71 @@
                     <h3 class="text-xl font-heading font-bold mb-4" data-i18n="expertise.card4_title">Second Opinion</h3>
                     <p class="text-slate-500 text-sm" data-i18n="expertise.card4_desc">Fundierte klinische Beratung basierend auf neuesten internationalen Standards.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Science Section -->
+    <section id="science" class="py-32 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 reveal">
+                <div class="max-w-2xl">
+                    <h2 class="text-4xl md:text-5xl font-heading font-black text-blue-950 mb-6" data-i18n="science.title">Wissenschaft</h2>
+                    <p class="text-slate-500 text-lg" data-i18n="science.sub">Laufende Forschungsprojekte und internationale Publikationen zur Optimierung der Patientenversorgung.</p>
+                </div>
+                <a href="https://www.researchgate.net" target="_blank" class="bg-slate-100 text-slate-800 px-8 py-4 rounded-2xl font-bold flex items-center gap-3 hover:bg-slate-200 transition-all">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+                    <span data-i18n="science.researchgate_btn">Publikationen auf ResearchGate</span>
+                </a>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="bg-blue-50 rounded-[3rem] p-10 md:p-14 reveal">
+                    <div class="inline-flex items-center gap-2 text-blue-700 font-bold uppercase tracking-widest text-xs mb-6">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                        <span>Habilitationsprojekt</span>
+                    </div>
+                    <h3 class="text-3xl font-heading font-black text-blue-950 mb-6" data-i18n="science.hab_title">Habilitation Focus</h3>
+                    <p class="text-slate-600 text-lg leading-relaxed mb-8" data-i18n="science.hab_desc">Entwicklung molekularer Marker zur Vorhersage des Therapieansprechens bei Immuntherapien im fortgeschrittenen NSCLC.</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-blue-600"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                        </div>
+                        <span class="font-bold text-blue-900" data-i18n="about.label1">Habilitationskandidatin JKU</span>
+                    </div>
+                </div>
+
+                <div class="grid gap-8">
+                    <div class="bg-white border border-slate-100 shadow-sm rounded-[2.5rem] p-10 flex gap-6 items-start reveal">
+                        <div class="w-12 h-12 rounded-2xl bg-slate-50 flex-shrink-0 flex items-center justify-center text-blue-600">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-heading font-bold mb-2">NSCLC Immunotherapy</h4>
+                            <p class="text-slate-500 text-sm">Prädiktive Biomarker in der Erstlinienbehandlung des nicht-kleinzelligen Lungenkarzinoms.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white border border-slate-100 shadow-sm rounded-[2.5rem] p-10 flex gap-6 items-start reveal">
+                        <div class="w-12 h-12 rounded-2xl bg-slate-50 flex-shrink-0 flex items-center justify-center text-blue-600">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 8 4 4-4 4"/><path d="M2 12h20"/><path d="m6 8-4 4 4 4"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-heading font-bold mb-2">Liquid Biopsy Research</h4>
+                            <p class="text-slate-500 text-sm">Monitoring von Therapieresistenzen durch zirkulierende Tumor-DNA.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Consultation Section -->
+    <section id="consultation" class="py-32 bg-blue-50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto bg-white rounded-[4rem] shadow-2xl p-12 md:p-24 text-center border border-slate-50 reveal">
+                <h2 class="text-3xl md:text-5xl font-heading font-black text-blue-950 mb-8" data-i18n="consultation.title">Klinische Zweitmeinung</h2>
+                <p class="text-slate-500 text-xl mb-12" data-i18n="consultation.desc">Die onkologische Therapieplanung erfordert höchste Präzision. Ich biete fundierte Beratung basierend auf neuesten internationalen Leitlinien.</p>
+                <a href="#contact" class="inline-block bg-blue-950 text-white px-12 py-5 rounded-2xl font-bold hover:scale-105 transition-transform" data-i18n="consultation.cta">Anfrage senden</a>
             </div>
         </div>
     </section>
