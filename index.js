@@ -6,7 +6,6 @@ let bootstrapModal = null;
 
 /**
  * Loads translation files based on language code.
- * Falls back gracefully to hardcoded German content if fetch fails.
  */
 async function loadTranslations(lang) {
     const body = document.getElementById('app-body');
@@ -78,11 +77,9 @@ function toggleMobileMenu() {
 function toggleModal() {
     const modalEl = document.getElementById('modal-overlay');
     if (!bootstrapModal) {
-        // Initialize Bootstrap modal if it doesn't exist
         bootstrapModal = new bootstrap.Modal(modalEl);
     }
     
-    // Simple toggle logic
     const isVisible = modalEl.classList.contains('show');
     if (isVisible) {
         bootstrapModal.hide();
@@ -106,18 +103,18 @@ function handleReveal() {
 
 /**
  * UI: Parallax Background logic.
+ * Improved to handle multiple elements with data-parallax-speed.
  */
 function handleParallax() {
-    const heroBg = document.getElementById('hero-bg');
-    if (!heroBg) return;
-    
-    // Calculate scroll offset (capped to section height for performance)
     const scrollY = window.scrollY;
-    const speed = 0.35; // Lower = slower movement
+    const parallaxElements = document.querySelectorAll('.parallax-element');
     
-    // Apply transform for smooth movement
-    // translate3d is used to trigger hardware acceleration
-    heroBg.style.transform = `translate3d(0, ${scrollY * speed}px, 0)`;
+    parallaxElements.forEach(el => {
+        const speed = parseFloat(el.getAttribute('data-parallax-speed')) || 0;
+        const offset = scrollY * speed;
+        // Use translate3d for better GPU performance
+        el.style.transform = `translate3d(0, ${offset}px, 0)`;
+    });
 }
 
 /**
@@ -194,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const browserLang = navigator.language.startsWith('en') ? 'en' : 'de';
     loadTranslations(browserLang);
     
-    // Smooth navbar, reveal on scroll, and parallax
+    // Efficient scroll handling
     let scrollTimeout = null;
     window.addEventListener('scroll', () => {
         const nav = document.getElementById('main-nav');
@@ -233,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Initial animation trigger
+    // Initial check
     setTimeout(() => {
         handleReveal();
         handleParallax();

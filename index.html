@@ -162,19 +162,33 @@
             background: white;
         }
         
-        .hero-parallax-bg {
+        .parallax-element {
             position: absolute;
+            will-change: transform;
+            z-index: 0;
+        }
+
+        .hero-parallax-bg {
             top: -10%;
             left: 0;
             width: 100%;
             height: 120%;
-            background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 35%, rgba(255, 255, 255, 0.7) 100%), url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=2000');
+            background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(248, 250, 252, 0.4) 100%), url('https://img.freepik.com/premium-vector/abstract-minimal-white-background-geometric-mosaic-wallpaper-design_92086-847.jpg');
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
-            z-index: 0;
-            will-change: transform;
         }
+
+        /* Decorative Parallax Blobs */
+        .parallax-blob {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(40px);
+        }
+        .blob-1 { top: 10%; right: -5%; }
+        .blob-2 { bottom: 5%; left: 10%; }
         
         .hero-content-wrapper {
             position: relative;
@@ -232,6 +246,14 @@
             transition: all 0.3s ease;
         }
         .expertise-card:hover .icon-box { background-color: var(--accent-blue); color: white; transform: rotate(5deg) scale(1.1); }
+
+        .brand-icon-img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            /* Filter to turn black PNG into #2563eb (var(--accent-blue)) */
+            filter: invert(31%) sepia(94%) saturate(2344%) hue-rotate(212deg) brightness(96%) contrast(96%);
+        }
 
         /* Media Gallery Item */
         .media-item {
@@ -333,7 +355,7 @@
     <nav class="premium-nav fixed-top d-flex align-items-center" id="main-nav">
         <div class="container d-flex justify-content-between align-items-center">
             <a class="navbar-brand d-flex align-items-center fw-black fs-3" href="#" style="letter-spacing: -1.5px; font-weight: 900; color: var(--brand-blue); text-decoration: none;">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" class="text-primary me-2"><path d="M7 12h4l2 5 4-10 2 5h4"/><path d="M3 12h4"/></svg>
+                <img src="https://cdn2.iconfinder.com/data/icons/medical-2380/68/35-512.png" alt="Lung Icon" class="brand-icon-img me-2">
                 Dr. Romana Wass, PhD<span class="text-primary">.</span>
             </a>
             
@@ -375,7 +397,13 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="hero-parallax-bg" id="hero-bg"></div>
+        <!-- Parallax Background -->
+        <div class="parallax-element hero-parallax-bg" id="hero-bg" data-parallax-speed="0.25"></div>
+        
+        <!-- Decorative Parallax Elements -->
+        <div class="parallax-element parallax-blob blob-1" data-parallax-speed="-0.15"></div>
+        <div class="parallax-element parallax-blob blob-2" data-parallax-speed="0.4"></div>
+        
         <div class="container py-5 hero-content-wrapper">
             <div class="row align-items-center g-5">
                 <div class="col-lg-7 reveal active">
