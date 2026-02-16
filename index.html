@@ -27,12 +27,25 @@
             -webkit-font-smoothing: antialiased;
             color: #334155;
             overflow-x: hidden;
+            
+            /* Typographical Improvements */
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            -ms-hyphens: auto;
+            hyphenate-limit-chars: 6 3 3;
+            text-wrap: pretty;
         }
         
-        h1, h2, h3, h4, h5, .font-heading { 
+        h1, h2, h3, h4, h5, .font-heading, p, .lead { 
             font-family: 'Montserrat', sans-serif; 
             letter-spacing: -0.015em;
             color: var(--brand-blue);
+            text-wrap: pretty;
+        }
+
+        p, .lead {
+            font-family: 'Open Sans', sans-serif;
+            letter-spacing: normal;
         }
 
         /* Navigation Excellence */
@@ -122,6 +135,7 @@
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.4s ease;
+            text-align: center;
         }
         #mobile-nav-overlay.active .mobile-link {
             opacity: 1;
@@ -137,8 +151,36 @@
         }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Hero Adjustment for Transparent Nav */
-        .hero-section { min-height: 100vh; padding-top: 0; display: flex; align-items: center; }
+        /* Hero Section with Enhanced Parallax */
+        .hero-section { 
+            min-height: 100vh; 
+            padding-top: 0; 
+            display: flex; 
+            align-items: center; 
+            position: relative;
+            overflow: hidden;
+            background: white;
+        }
+        
+        .hero-parallax-bg {
+            position: absolute;
+            top: -10%;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 35%, rgba(255, 255, 255, 0.7) 100%), url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=2000');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: 0;
+            will-change: transform;
+        }
+        
+        .hero-content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
         .bg-slate-50 { background-color: #f8fafc; }
         
         .phi-aspect-v { 
@@ -172,6 +214,8 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             height: 100%;
             background: white;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         .expertise-card:hover { transform: translateY(-15px); box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.1); border-color: transparent; }
         
@@ -266,6 +310,13 @@
             font-size: 0.9rem;
         }
         .footer-link:hover { color: var(--accent-blue); }
+
+        @media (max-width: 991px) {
+            .hero-parallax-bg {
+                top: 0;
+                height: 100%;
+            }
+        }
     </style>
     
     <script type="importmap">
@@ -323,9 +374,9 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="hero-section position-relative">
-        <div class="position-absolute top-0 end-0 h-100 bg-slate-50 d-none d-lg-block" style="width: 45%; z-index: -1;"></div>
-        <div class="container">
+    <section class="hero-section">
+        <div class="hero-parallax-bg" id="hero-bg"></div>
+        <div class="container py-5 hero-content-wrapper">
             <div class="row align-items-center g-5">
                 <div class="col-lg-7 reveal active">
                     <div class="d-inline-flex align-items-center gap-3 mb-5">
@@ -342,7 +393,7 @@
                 </div>
                 <div class="col-lg-5 reveal active">
                     <div class="phi-aspect-v shadow-2xl">
-                        <img src="https://images.unsplash.com/photo-1559839734-2b71f1536780?auto=format&fit=crop&q=80&w=800" alt="Dr. Romana Wass, PhD" onerror="this.src='https://images.unsplash.com/photo-1559839734-2b71f1536780?auto=format&fit=crop&q=80&w=800'">
+                        <img src="https://img.freepik.com/premium-photo/medical-female-doctor-doctors-clinic_972478-11382.jpg" alt="Dr. Romana Wass, PhD" onerror="this.src='https://images.unsplash.com/photo-1559839734-2b71f1536780?auto=format&fit=crop&q=80&w=800'">
                     </div>
                 </div>
             </div>
@@ -415,7 +466,7 @@
 
             <div class="row g-5">
                 <div class="col-lg-6 reveal">
-                    <div class="p-5 p-lg-5 bg-light rounded-5 h-100 border border-white">
+                    <div class="p-5 p-lg-5 bg-light rounded-5 h-100 border border-white expertise-card">
                         <div class="d-flex align-items-center gap-3 text-primary fw-black text-uppercase mb-5" style="font-size: 0.75rem; letter-spacing: 3px;">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
                             <span>Habilitationsprojekt</span>
@@ -432,7 +483,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="d-flex flex-column gap-5">
-                        <div class="card p-5 border-0 shadow-sm rounded-5 bg-white reveal">
+                        <div class="card p-5 border-0 shadow-sm rounded-5 bg-white reveal expertise-card">
                             <div class="d-flex gap-5">
                                 <div class="icon-box mb-0 flex-shrink-0" style="width: 80px; height: 80px;">
                                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
@@ -443,7 +494,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card p-5 border-0 shadow-sm rounded-5 bg-white reveal">
+                        <div class="card p-5 border-0 shadow-sm rounded-5 bg-white reveal expertise-card">
                             <div class="d-flex gap-5">
                                 <div class="icon-box mb-0 flex-shrink-0" style="width: 80px; height: 80px;">
                                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 8 4 4-4 4"/><path d="M2 12h20"/><path d="m6 8-4 4 4 4"/></svg>
@@ -463,7 +514,7 @@
     <!-- Advisory Section -->
     <section id="advisory" class="py-5 bg-slate-50">
         <div class="container py-5">
-            <div class="card bg-white border-0 shadow-lg p-5 p-lg-5 text-center rounded-5 reveal" style="border-radius: 4rem !important;">
+            <div class="card bg-white border-0 shadow-lg p-5 p-lg-5 text-center rounded-5 reveal expertise-card" style="border-radius: 4rem !important;">
                 <div class="py-lg-5 px-lg-5">
                     <h2 class="display-3 fw-black mb-5 text-dark" data-i18n="advisory.title">Scientific Advisory & Lectures</h2>
                     <p class="lead text-muted mb-5 mx-auto fs-4" style="max-width: 900px;" data-i18n="advisory.desc">Dr. Romana Wass bietet wissenschaftliche Expertise für pharmazeutische Unternehmen (Advisory Boards, Vorträge). Ziel ist der Austausch zwischen Forschung und Praxis. Diese Tätigkeit dient dem wissenschaftlichen Diskurs und stellt keine Produktwerbung dar.</p>

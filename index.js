@@ -105,6 +105,22 @@ function handleReveal() {
 }
 
 /**
+ * UI: Parallax Background logic.
+ */
+function handleParallax() {
+    const heroBg = document.getElementById('hero-bg');
+    if (!heroBg) return;
+    
+    // Calculate scroll offset (capped to section height for performance)
+    const scrollY = window.scrollY;
+    const speed = 0.35; // Lower = slower movement
+    
+    // Apply transform for smooth movement
+    // translate3d is used to trigger hardware acceleration
+    heroBg.style.transform = `translate3d(0, ${scrollY * speed}px, 0)`;
+}
+
+/**
  * UI: AI Chat toggle.
  */
 function toggleAIChat() {
@@ -178,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const browserLang = navigator.language.startsWith('en') ? 'en' : 'de';
     loadTranslations(browserLang);
     
-    // Smooth navbar and reveal on scroll
+    // Smooth navbar, reveal on scroll, and parallax
     let scrollTimeout = null;
     window.addEventListener('scroll', () => {
         const nav = document.getElementById('main-nav');
@@ -191,6 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!scrollTimeout) {
             scrollTimeout = window.requestAnimationFrame(() => {
                 handleReveal();
+                handleParallax();
                 scrollTimeout = null;
             });
         }
@@ -217,5 +234,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Initial animation trigger
-    setTimeout(handleReveal, 500);
+    setTimeout(() => {
+        handleReveal();
+        handleParallax();
+    }, 500);
 });
