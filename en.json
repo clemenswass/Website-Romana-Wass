@@ -4,16 +4,15 @@
     "about": "About",
     "expertise": "Expertise",
     "science": "Science",
-    "lectures": "Lectures & Advisory",
-    "consultation": "Second Opinion",
+    "advisory": "Advisory",
+    "media": "Media",
     "contact": "Contact"
   },
   "hero": {
     "role": "Senior Physician | JKU University Hospital Linz",
     "title": "Dr. Romana Wass, PhD",
     "sub": "Specialist in Pulmonology with a focus on Oncology. Individual high-end medicine meets academic excellence at JKU University Hospital Linz.",
-    "cta1": "Request Second Opinion",
-    "cta2": "Lectures & Advisory"
+    "cta1": "Request Advisory"
   },
   "expertise": {
     "tag": "Medical Specializations",
@@ -25,7 +24,7 @@
     "card3_title": "Early Detection",
     "card3_desc": "Investigation of unclear pulmonary findings using state-of-the-art imaging and screening.",
     "card4_title": "Expert Advisory",
-    "card4_desc": "Scientific consulting for tumor boards and pharmaceutical expert committees."
+    "card4_desc": "Scientific consulting for pharmaceutical expert committees and advisory boards."
   },
   "about": {
     "quote": "\"Scientific progress is only valuable when it reaches the patient directly.\"",
@@ -41,18 +40,18 @@
     "hab_desc": "Development of molecular markers to predict therapeutic response to immunotherapies in advanced NSCLC.",
     "researchgate_btn": "Publications on ResearchGate"
   },
-  "lectures": {
-    "title": "Lectures & Advisory",
-    "advisory_tag": "Scientific Exchange",
-    "advisory_title": "Expert Advisory for Industry",
-    "advisory_desc": "To foster the transfer between clinical research and medical practice, Dr. Romana Wass advises leading pharmaceutical companies in scientific committees. This professional exchange serves the further development of therapeutic standards and the implementation of the latest clinical trial results into daily practice.",
-    "advisory_partners": "Examples of collaborations (Advisory Boards & Lectures): Roche, MSD, Astra Zeneca, Takeda.",
-    "advisory_note": "These activities are conducted as part of scientific discourse and do not constitute an endorsement of specific pharmaceutical products."
+  "advisory": {
+    "title": "Scientific Advisory & Lectures",
+    "desc": "Dr. Romana Wass provides scientific expertise for pharmaceutical companies (Advisory Boards, Lectures). The goal is to exchange knowledge between research and practice. This activity serves scientific discourse and does not constitute product advertising.",
+    "cta": "Submit Inquiry"
   },
-  "consultation": {
-    "title": "Clinical Second Opinion",
-    "desc": "Oncological therapy planning requires maximum precision. I offer well-founded advice and second opinions based on the latest international guidelines for patients and relatives.",
-    "cta": "Send Inquiry"
+  "media": {
+    "title": "Media & Presentations",
+    "sub": "Insights into congresses, podcasts, and scientific public contributions.",
+    "item1": "Oncology Podcast Special",
+    "item2": "Keynote Speaker @ ÖGP",
+    "item3": "Interview: Future of Immunotherapy",
+    "link": "View contribution"
   },
   "contact": {
     "title": "Contact",
@@ -63,7 +62,8 @@
   },
   "footer": {
     "tag": "High-end Medicine & Research",
-    "legal": "Legal Notice"
+    "legal": "Legal Notice",
+    "links_title": "Useful Links"
   },
   "impressum": {
     "title": "Legal Notice",

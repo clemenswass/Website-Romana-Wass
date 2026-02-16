@@ -148,6 +148,7 @@
             border-radius: 3rem;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             border: 8px solid white;
+            background: #f1f5f9;
         }
         .phi-aspect-v img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
         
@@ -161,6 +162,7 @@
             letter-spacing: 0.1em;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             border: none;
+            text-decoration: none;
         }
         .btn-brand:hover { background-color: var(--accent-blue); color: white; transform: translateY(-5px); box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.3); }
 
@@ -186,6 +188,31 @@
             transition: all 0.3s ease;
         }
         .expertise-card:hover .icon-box { background-color: var(--accent-blue); color: white; transform: rotate(5deg) scale(1.1); }
+
+        /* Media Gallery Item */
+        .media-item {
+            overflow: hidden;
+            border-radius: 2rem;
+            position: relative;
+            background: var(--brand-blue);
+        }
+        .media-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: transform 0.5s ease;
+        }
+        .media-item:hover img { transform: scale(1.1); opacity: 0.6; }
+        .media-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(transparent, rgba(15,23,42,0.9));
+            color: white;
+        }
 
         /* AI Chat */
         #ai-chat-window {
@@ -230,6 +257,15 @@
         #ai-chat-toggle:hover { transform: scale(1.1) translateY(-5px); background: var(--accent-blue); }
 
         .modal-content { border-radius: 3rem; border: none; padding: 3rem; }
+        
+        /* Footer Links Style */
+        .footer-link {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+        .footer-link:hover { color: var(--accent-blue); }
     </style>
     
     <script type="importmap">
@@ -245,16 +281,17 @@
     <!-- Premium Navigation -->
     <nav class="premium-nav fixed-top d-flex align-items-center" id="main-nav">
         <div class="container d-flex justify-content-between align-items-center">
-            <a class="navbar-brand d-flex align-items-center fw-black fs-3" href="#" style="letter-spacing: -1.5px; font-weight: 900; color: var(--brand-blue);">
+            <a class="navbar-brand d-flex align-items-center fw-black fs-3" href="#" style="letter-spacing: -1.5px; font-weight: 900; color: var(--brand-blue); text-decoration: none;">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" class="text-primary me-2"><path d="M7 12h4l2 5 4-10 2 5h4"/><path d="M3 12h4"/></svg>
-                Dr. Romana Wass<span class="text-primary">.</span>
+                Dr. Romana Wass, PhD<span class="text-primary">.</span>
             </a>
             
             <div class="d-none d-lg-flex align-items-center gap-5">
                 <a href="#about" class="nav-link-custom" data-i18n="nav.about">Über mich</a>
                 <a href="#expertise" class="nav-link-custom" data-i18n="nav.expertise">Expertise</a>
                 <a href="#science" class="nav-link-custom" data-i18n="nav.science">Wissenschaft</a>
-                <a href="#consultation" class="nav-link-custom" data-i18n="nav.consultation">Zweitmeinung</a>
+                <a href="#advisory" class="nav-link-custom" data-i18n="nav.advisory">Advisory</a>
+                <a href="#media" class="nav-link-custom" data-i18n="nav.media">Medien</a>
                 <a href="#contact" class="btn btn-dark rounded-pill px-4 py-2 fw-bold text-uppercase shadow-sm" style="font-size: 0.65rem; letter-spacing: 0.1em;" data-i18n="nav.contact">Kontakt</a>
                 
                 <button onclick="window.switchLanguage()" class="btn btn-link p-0 text-decoration-none fw-black text-primary" style="font-size: 0.75rem; letter-spacing: 0.1em;">
@@ -274,9 +311,11 @@
     <div id="mobile-nav-overlay">
         <button class="btn text-white position-absolute top-0 end-0 m-5 p-4 fs-1" onclick="window.toggleMobileMenu()">✕</button>
         <a href="#about" class="mobile-link" onclick="window.toggleMobileMenu()" data-i18n="nav.about">Über mich</a>
-        <a href="#expertise" class="mobile-link" onclick="window.toggleMobileMenu()" data-i18n="nav.expertise" style="transition-delay: 0.1s;">Expertise</a>
-        <a href="#science" class="mobile-link" onclick="window.toggleMobileMenu()" data-i18n="nav.science" style="transition-delay: 0.2s;">Wissenschaft</a>
-        <a href="#contact" class="mobile-link" onclick="window.toggleMobileMenu()" data-i18n="nav.contact" style="transition-delay: 0.3s;">Kontakt</a>
+        <a href="#expertise" class="mobile-link" onclick="window.toggleMobileMenu()" data-i18n="nav.expertise">Expertise</a>
+        <a href="#science" class="mobile-link" onclick="window.toggleMobileMenu()" data-i18n="nav.science">Wissenschaft</a>
+        <a href="#advisory" class="mobile-link" onclick="window.toggleMobileMenu()" data-i18n="nav.advisory">Advisory</a>
+        <a href="#media" class="mobile-link" onclick="window.toggleMobileMenu()" data-i18n="nav.media">Medien</a>
+        <a href="#contact" class="mobile-link" onclick="window.toggleMobileMenu()" data-i18n="nav.contact">Kontakt</a>
         
         <div class="mt-5 pt-5 border-top border-secondary border-opacity-25 w-100 text-center">
             <button onclick="window.switchLanguage(); window.toggleMobileMenu()" class="btn text-primary fs-3 fw-black p-0" id="mobile-lang-label">English</button>
@@ -295,15 +334,15 @@
                     <h1 class="display-1 fw-black mb-5" style="line-height: 1; letter-spacing: -3px;" data-i18n="hero.title">Dr. Romana Wass, PhD</h1>
                     <p class="lead text-muted mb-5 pe-lg-5 fs-4" data-i18n="hero.sub">Fachärztin für Lungenheilkunde mit Schwerpunkt Thoraxonkologie. Präzisionsmedizin auf akademischem Spitzenniveau.</p>
                     <div class="d-flex flex-wrap gap-4">
-                        <a href="#consultation" class="btn btn-brand d-inline-flex align-items-center">
-                            <span data-i18n="hero.cta1">Zweitmeinung anfragen</span>
+                        <a href="#advisory" class="btn btn-brand d-inline-flex align-items-center">
+                            <span data-i18n="hero.cta1">Advisory anfragen</span>
                             <svg class="ms-3" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-5 reveal active">
                     <div class="phi-aspect-v shadow-2xl">
-                        <img src="https://placehold.co/800x1000/0f172a/ffffff?text=Dr.+Romana+Wass" alt="Dr. Romana Wass, PhD">
+                        <img src="img/romana_wass.jpg" alt="Dr. Romana Wass, PhD" onerror="this.src='https://placehold.co/800x1000/0f172a/ffffff?text=Dr.+Romana+Wass'">
                     </div>
                 </div>
             </div>
@@ -350,7 +389,7 @@
                         <div class="icon-box">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                         </div>
-                        <h3 class="h4 fw-black mb-4" data-i18n="expertise.card4_title">Second Opinion</h3>
+                        <h3 class="h4 fw-black mb-4" data-i18n="expertise.card4_title">Expert Advisory</h3>
                         <p class="text-muted" data-i18n="expertise.card4_desc">Fundierte klinische Beratung basierend auf neuesten internationalen Standards.</p>
                     </div>
                 </div>
@@ -367,7 +406,7 @@
                     <p class="lead text-muted mb-0 fs-4" data-i18n="science.sub">Laufende Forschungsprojekte und internationale Publikationen zur Optimierung der Patientenversorgung.</p>
                 </div>
                 <div class="col-lg-4 text-lg-end">
-                    <a href="https://www.researchgate.net" target="_blank" class="btn btn-outline-dark rounded-4 px-5 py-3 fw-black border-2 d-inline-flex align-items-center text-uppercase" style="font-size: 0.7rem; letter-spacing: 0.1em;">
+                    <a href="https://www.researchgate.net" target="_blank" class="btn btn-outline-dark rounded-4 px-5 py-3 fw-black border-2 d-inline-flex align-items-center text-uppercase" style="font-size: 0.7rem; letter-spacing: 0.1em; text-decoration: none;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="me-3"><path d="M12 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
                         <span data-i18n="science.researchgate_btn">Publikationen auf ResearchGate</span>
                     </a>
@@ -421,16 +460,56 @@
         </div>
     </section>
 
-    <!-- Consultation -->
-    <section id="consultation" class="py-5 bg-slate-50">
+    <!-- Advisory Section (Replaces Second Opinion) -->
+    <section id="advisory" class="py-5 bg-slate-50">
         <div class="container py-5">
-            <div class="card bg-white border-0 shadow-2xl p-5 p-lg-5 text-center rounded-[4rem] reveal">
+            <div class="card bg-white border-0 shadow-lg p-5 p-lg-5 text-center rounded-5 reveal" style="border-radius: 4rem !important;">
                 <div class="py-lg-5 px-lg-5">
-                    <h2 class="display-3 fw-black mb-5 text-dark" data-i18n="consultation.title">Klinische Zweitmeinung</h2>
-                    <p class="lead text-muted mb-5 mx-auto fs-4" style="max-width: 900px;" data-i18n="consultation.desc">Die onkologische Therapieplanung erfordert höchste Präzision. Ich biete fundierte Beratung basierend auf neuesten internationalen Leitlinien.</p>
+                    <h2 class="display-3 fw-black mb-5 text-dark" data-i18n="advisory.title">Scientific Advisory & Lectures</h2>
+                    <p class="lead text-muted mb-5 mx-auto fs-4" style="max-width: 900px;" data-i18n="advisory.desc">Dr. Romana Wass bietet wissenschaftliche Expertise für pharmazeutische Unternehmen (Advisory Boards, Vorträge). Ziel ist der Austausch zwischen Forschung und Praxis. Diese Tätigkeit dient dem wissenschaftlichen Diskurs und stellt keine Produktwerbung dar.</p>
                     <a href="#contact" class="btn btn-brand px-5 py-3">
-                        <span data-i18n="consultation.cta">Anfrage senden</span>
+                        <span data-i18n="advisory.cta">Anfrage senden</span>
                     </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Section -->
+    <section id="media" class="py-5 bg-white">
+        <div class="container py-5">
+            <div class="text-center mb-5 pb-5 reveal">
+                <h2 class="display-3 fw-black mb-4" data-i18n="media.title">Medien & Präsentationen</h2>
+                <p class="lead text-muted mx-auto fs-5" style="max-width: 700px;" data-i18n="media.sub">Einblicke in Kongresse, Podcasts und wissenschaftliche Publikumsbeiträge.</p>
+                <div class="mx-auto bg-primary rounded-pill mt-4" style="width: 80px; height: 6px;"></div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4 reveal">
+                    <div class="media-item">
+                        <img src="https://placehold.co/600x400/0f172a/ffffff?text=Podcast" alt="Podcast">
+                        <div class="media-overlay">
+                            <h4 class="h5 fw-bold mb-2" data-i18n="media.item1">Onkologie-Podcast Spezial</h4>
+                            <a href="#" class="btn btn-sm btn-outline-light rounded-pill px-3" data-i18n="media.link">Zum Beitrag</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal" style="transition-delay: 0.1s;">
+                    <div class="media-item">
+                        <img src="https://placehold.co/600x400/0f172a/ffffff?text=Kongress" alt="Kongress">
+                        <div class="media-overlay">
+                            <h4 class="h5 fw-bold mb-2" data-i18n="media.item2">Keynote Speaker @ ÖGP</h4>
+                            <a href="#" class="btn btn-sm btn-outline-light rounded-pill px-3" data-i18n="media.link">Zum Beitrag</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal" style="transition-delay: 0.2s;">
+                    <div class="media-item">
+                        <img src="https://placehold.co/600x400/0f172a/ffffff?text=Interview" alt="Interview">
+                        <div class="media-overlay">
+                            <h4 class="h5 fw-bold mb-2" data-i18n="media.item3">Interview: Zukunft der Immuntherapie</h4>
+                            <a href="#" class="btn btn-sm btn-outline-light rounded-pill px-3" data-i18n="media.link">Zum Beitrag</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -464,7 +543,7 @@
                                 </div>
                             </div>
                             <textarea rows="6" class="form-control form-control-lg border-0 shadow-sm rounded-4 px-4 py-3 fs-5 mb-5" placeholder="Ihre Nachricht"></textarea>
-                            <button class="btn btn-brand w-100 py-4 shadow-xl fs-5">
+                            <button class="btn btn-brand w-100 py-4 shadow-lg fs-5">
                                 <span data-i18n="contact.btn">Anfrage absenden</span>
                             </button>
                         </form>
@@ -477,14 +556,24 @@
     <!-- Footer -->
     <footer class="py-5 bg-white border-top">
         <div class="container py-5">
-            <div class="row align-items-center justify-content-between g-5">
-                <div class="col-md-auto">
-                    <div class="h3 fw-black mb-0">Dr. Romana Wass<span class="text-primary">.</span></div>
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <div class="h3 fw-black mb-3">Dr. Romana Wass, PhD<span class="text-primary">.</span></div>
+                    <p class="text-muted small" data-i18n="footer.tag">Spitzenmedizin & Forschung</p>
                 </div>
-                <div class="col-md-auto">
-                    <div class="d-flex gap-5 align-items-center text-uppercase fw-black" style="font-size: 0.75rem; letter-spacing: 3px; color: #94a3b8;">
-                        <button class="btn p-0 text-uppercase fw-black text-muted" onclick="window.toggleModal()" style="font-size: 0.75rem; letter-spacing: 3px;" data-i18n="footer.legal">Impressum</button>
-                        <span>&copy; 2024 wass.at</span>
+                <div class="col-lg-4">
+                    <h5 class="fw-bold mb-4" data-i18n="footer.links_title">Nützliche Links</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a href="https://www.jku.at/" target="_blank" class="footer-link">JKU Linz</a></li>
+                        <li><a href="https://www.ogp.at/" target="_blank" class="footer-link">Österreichische Gesellschaft für Pneumologie (ÖGP)</a></li>
+                        <li><a href="https://www.researchgate.net/" target="_blank" class="footer-link">ResearchGate Profile</a></li>
+                        <li><a href="https://www.kepleruniklinikum.at/" target="_blank" class="footer-link">Kepler Universitätsklinikum</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <div class="d-flex flex-column gap-3">
+                        <button class="btn p-0 text-uppercase fw-black text-muted text-lg-end" onclick="window.toggleModal()" style="font-size: 0.75rem; letter-spacing: 3px;" data-i18n="footer.legal">Impressum</button>
+                        <span class="text-muted small" style="letter-spacing: 1px;">&copy; 2026 wass.at</span>
                     </div>
                 </div>
             </div>
@@ -525,7 +614,7 @@
     <!-- Impressum Modal -->
     <div class="modal fade" id="modal-overlay" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content border-0 shadow-2xl">
+            <div class="modal-content border-0 shadow-lg" style="border-radius: 3rem !important;">
                 <div class="modal-header border-0 pb-0 px-5 pt-5">
                     <button type="button" class="btn-close" onclick="window.toggleModal()" aria-label="Close"></button>
                 </div>

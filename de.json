@@ -4,16 +4,15 @@
     "about": "Über mich",
     "expertise": "Expertise",
     "science": "Wissenschaft",
-    "lectures": "Vorträge & Advisory",
-    "consultation": "Zweitmeinung",
+    "advisory": "Advisory",
+    "media": "Medien",
     "contact": "Kontakt"
   },
   "hero": {
     "role": "Oberärztin | JKU Universitätsklinikum Linz",
     "title": "Dr. Romana Wass, PhD",
     "sub": "Spezialistin für Lungenheilkunde mit Schwerpunkt Onkologie. Individuelle Spitzenmedizin trifft auf akademische Exzellenz am JKU Universitätsklinikum Linz.",
-    "cta1": "Zweitmeinung anfragen",
-    "cta2": "Vorträge & Advisory"
+    "cta1": "Advisory anfragen"
   },
   "expertise": {
     "tag": "Medizinische Fachbereiche",
@@ -25,7 +24,7 @@
     "card3_title": "Früherkennung",
     "card3_desc": "Abklärung unklarer Lungenbefunde mittels modernster Bildgebungsverfahren und Screening.",
     "card4_title": "Expert Advisory",
-    "card4_desc": "Wissenschaftliche Beratung für Tumorboards und pharmazeutische Expertengremien."
+    "card4_desc": "Wissenschaftliche Beratung für pharmazeutische Expertengremien und Advisory Boards."
   },
   "about": {
     "quote": "\"Wissenschaftlicher Fortschritt ist dann wertvoll, wenn er unmittelbar beim Patienten ankommt.\"",
@@ -41,18 +40,18 @@
     "hab_desc": "Entwicklung molekularer Marker zur Vorhersage des Therapieansprechens bei Immuntherapien im fortgeschrittenen NSCLC.",
     "researchgate_btn": "Publikationen auf ResearchGate"
   },
-  "lectures": {
-    "title": "Vorträge & Advisory",
-    "advisory_tag": "Wissenschaftlicher Austausch",
-    "advisory_title": "Expert Advisory für die Industrie",
-    "advisory_desc": "Um den Transfer zwischen klinischer Forschung und medizinischer Praxis zu fördern, berät Dr. Romana Wass führende pharmazeutische Unternehmen in wissenschaftlichen Gremien. Dieser fachliche Austausch dient der Weiterentwicklung von Therapiestandards und der Implementierung neuester Studienergebnisse in den klinischen Alltag.",
-    "advisory_partners": "Beispiele für Kooperationen (Advisory Boards & Vorträge): Roche, MSD, Astra Zeneca, Takeda.",
-    "advisory_note": "Diese Tätigkeiten erfolgen im Rahmen des wissenschaftlichen Diskurses und stellen keine Bewerbung spezifischer pharmazeutischer Produkte dar."
-  },
-  "consultation": {
-    "title": "Klinische Zweitmeinung",
-    "desc": "Die onkologische Therapieplanung erfordert höchste Präzision. Ich biete fundierte Beratung und Zweitmeinungen basierend auf neuesten internationalen Leitlinien für Patienten und Angehörige.",
+  "advisory": {
+    "title": "Scientific Advisory & Lectures",
+    "desc": "Dr. Romana Wass bietet wissenschaftliche Expertise für pharmazeutische Unternehmen (Advisory Boards, Vorträge). Ziel ist der Austausch zwischen Forschung und Praxis. Diese Tätigkeit dient dem wissenschaftlichen Diskurs und stellt keine Produktwerbung dar.",
     "cta": "Anfrage senden"
+  },
+  "media": {
+    "title": "Medien & Präsentationen",
+    "sub": "Einblicke in Kongresse, Podcasts und wissenschaftliche Publikumsbeiträge.",
+    "item1": "Onkologie-Podcast Spezial",
+    "item2": "Keynote Speaker @ ÖGP",
+    "item3": "Interview: Zukunft der Immuntherapie",
+    "link": "Zum Beitrag"
   },
   "contact": {
     "title": "Kontakt",
@@ -63,7 +62,8 @@
   },
   "footer": {
     "tag": "Spitzenmedizin & Forschung",
-    "legal": "Impressum"
+    "legal": "Impressum",
+    "links_title": "Nützliche Links"
   },
   "impressum": {
     "title": "Impressum",
