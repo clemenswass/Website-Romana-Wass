@@ -1,3 +1,4 @@
+
 {
   "nav": {
     "role_label": "Specialist",
@@ -62,23 +63,26 @@
   },
   "footer": {
     "tag": "High-end Medicine & Research",
-    "legal": "Legal Notice",
+    "legal": "Legal Notice & Disclaimers",
     "links_title": "Useful Links"
   },
   "impressum": {
     "title": "Legal Notice",
     "owner_label": "Media Owner & Publisher",
-    "owner_text": "Dr. Romana Wass, PhD\nResidence: Salzburg, Austria\nOffice: JKU University Hospital Linz\nKrankenhausstraße 9, 4020 Linz",
-    "subject_label": "Object of Company",
-    "subject_text": "Medical activity (Specialist in Pulmonology)",
+    "owner_text": "Dr. Romana Wass, PhD",
+    "address_label": "Contact & Location",
+    "address_text": "JKU University Hospital Linz\nKrankenhausstrasse 9, 4020 Linz\nAustria",
+    "uid_label": "VAT Number",
+    "uid_text": "ATU12345678",
     "chamber_label": "Competent Chamber",
-    "chamber_text": "Medical Chamber of Upper Austria / Medical Chamber of Salzburg",
+    "chamber_text": "Medical Chamber of Upper Austria",
     "title_label": "Professional Title",
-    "title_text": "Specialist in Internal Medicine and Pulmonology (awarded in Austria)",
+    "title_text": "Specialist in Pulmonology (awarded in Austria)",
+    "regulations_label": "Professional Regulations",
+    "regulations_text": "Activities are subject to the Austrian Medical Act (Ärztegesetz 1998)",
+    "regulations_link": "To the Medical Act 1998 (RIS)",
     "disclaimer_label": "Disclaimer",
     "disclaimer_text": "All content is for information purposes only and does not constitute medical advice. No liability for external links.",
-    "privacy_label": "Privacy Policy",
-    "privacy_text": "We do not use tracking cookies. Personal data is only processed to respond to inquiries.",
     "close": "Close"
   }
 }

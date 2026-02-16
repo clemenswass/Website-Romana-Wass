@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -324,6 +325,13 @@
 
         .modal-content { border-radius: 3rem; border: none; padding: 3rem; }
         
+        /* Imprint Specific Styling */
+        .imprint-row { margin-bottom: 2rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 1.5rem; }
+        .imprint-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 800; color: #94a3b8; margin-bottom: 0.5rem; }
+        .imprint-value { font-size: 1rem; font-weight: 600; color: var(--brand-blue); white-space: pre-line; }
+        .imprint-link { color: var(--accent-blue); text-decoration: none; font-weight: 700; border-bottom: 2px solid rgba(37, 99, 235, 0.2); transition: all 0.3s ease; }
+        .imprint-link:hover { border-bottom-color: var(--accent-blue); }
+
         /* Footer Links Style */
         .footer-link {
             color: #94a3b8;
@@ -651,7 +659,7 @@
                 </div>
                 <div class="col-lg-4 text-lg-end">
                     <div class="d-flex flex-column gap-3">
-                        <button class="btn p-0 text-uppercase fw-black text-muted text-lg-end" onclick="window.toggleModal()" style="font-size: 0.75rem; letter-spacing: 3px;" data-i18n="footer.legal">Impressum</button>
+                        <button class="btn p-0 text-uppercase fw-black text-muted text-lg-end" onclick="window.toggleModal()" style="font-size: 0.75rem; letter-spacing: 3px;" data-i18n="footer.legal">Impressum & Rechtliches</button>
                         <span class="text-muted small" style="letter-spacing: 1px;">&copy; 2026 wass.at</span>
                     </div>
                 </div>
@@ -699,11 +707,46 @@
                 </div>
                 <div class="modal-body p-5">
                     <h2 class="display-5 fw-black mb-5 text-dark" data-i18n="impressum.title">Impressum</h2>
-                    <div class="text-muted fs-5 mb-0" style="white-space: pre-line; line-height: 1.8;" data-i18n="impressum.owner_text">
-                        Dr. Romana Wass, PhD
-                        Dienstort: JKU Universitätsklinikum Linz
-                        Krankenhausstraße 9, 4020 Linz
-                        Österreich
+                    
+                    <div class="container-fluid p-0">
+                        <div class="imprint-row">
+                            <div class="imprint-label" data-i18n="impressum.owner_label">Medieninhaberin</div>
+                            <div class="imprint-value" data-i18n="impressum.owner_text">Dr. Romana Wass, PhD</div>
+                        </div>
+
+                        <div class="imprint-row">
+                            <div class="imprint-label" data-i18n="impressum.address_label">Kontakt & Standort</div>
+                            <div class="imprint-value" data-i18n="impressum.address_text">JKU Universitätsklinikum Linz...</div>
+                        </div>
+
+                        <div class="row imprint-row g-0">
+                            <div class="col-md-6 mb-4 mb-md-0">
+                                <div class="imprint-label" data-i18n="impressum.uid_label">UID-Nummer</div>
+                                <div class="imprint-value" data-i18n="impressum.uid_text">ATU12345678</div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="imprint-label" data-i18n="impressum.chamber_label">Zuständige Kammer</div>
+                                <div class="imprint-value" data-i18n="impressum.chamber_text">Ärztekammer für Oberösterreich</div>
+                            </div>
+                        </div>
+
+                        <div class="imprint-row">
+                            <div class="imprint-label" data-i18n="impressum.title_label">Berufsbezeichnung</div>
+                            <div class="imprint-value" data-i18n="impressum.title_text">Fachärztin für Lungenheilkunde (verliehen in Österreich)</div>
+                        </div>
+
+                        <div class="imprint-row">
+                            <div class="imprint-label" data-i18n="impressum.regulations_label">Berufsrechtliche Vorschriften</div>
+                            <div class="imprint-value">
+                                <span data-i18n="impressum.regulations_text">Ärztegesetz 1998</span><br>
+                                <a href="https://www.ris.bka.gv.at/GeltendeFassung.wxe?Abfrage=Bundesnormen&Gesetzesnummer=10011138" target="_blank" class="imprint-link" data-i18n="impressum.regulations_link">Link zum RIS</a>
+                            </div>
+                        </div>
+
+                        <div class="imprint-row border-0 mb-0">
+                            <div class="imprint-label" data-i18n="impressum.disclaimer_label">Haftungsausschluss</div>
+                            <div class="imprint-value small text-muted fw-normal" data-i18n="impressum.disclaimer_text">Sämtliche Inhalte dienen lediglich der Information...</div>
+                        </div>
                     </div>
                 </div>
             </div>

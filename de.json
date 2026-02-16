@@ -1,3 +1,4 @@
+
 {
   "nav": {
     "role_label": "Fachärztin",
@@ -62,23 +63,26 @@
   },
   "footer": {
     "tag": "Spitzenmedizin & Forschung",
-    "legal": "Impressum",
+    "legal": "Impressum & Rechtliches",
     "links_title": "Nützliche Links"
   },
   "impressum": {
     "title": "Impressum",
     "owner_label": "Medieninhaberin & Herausgeberin",
-    "owner_text": "Dr. Romana Wass, PhD\nWohnort: Salzburg, Österreich\nDienstort: JKU Universitätsklinikum Linz\nKrankenhausstraße 9, 4020 Linz",
-    "subject_label": "Unternehmensgegenstand",
-    "subject_text": "Ärztliche Tätigkeit (Fachärztin für Pneumologie)",
+    "owner_text": "Dr. Romana Wass, PhD",
+    "address_label": "Kontakt & Standort",
+    "address_text": "JKU Universitätsklinikum Linz\nKrankenhausstraße 9, 4020 Linz\nÖsterreich",
+    "uid_label": "UID-Nummer",
+    "uid_text": "ATU12345678",
     "chamber_label": "Zuständige Kammer",
-    "chamber_text": "Ärztekammer für Oberösterreich / Ärztekammer für Salzburg",
+    "chamber_text": "Ärztekammer für Oberösterreich",
     "title_label": "Berufsbezeichnung",
-    "title_text": "Fachärztin für Innere Medizin und Pneumologie (verliehen in Österreich)",
+    "title_text": "Fachärztin für Lungenheilkunde (verliehen in Österreich)",
+    "regulations_label": "Berufsrechtliche Vorschriften",
+    "regulations_text": "Die Tätigkeit unterliegt dem Ärztegesetz 1998",
+    "regulations_link": "Zum Ärztegesetz 1998 (RIS)",
     "disclaimer_label": "Haftungsausschluss",
     "disclaimer_text": "Sämtliche Inhalte dienen lediglich der Information und stellen keine medizinische Beratung dar. Keine Haftung für externe Links.",
-    "privacy_label": "Datenschutz",
-    "privacy_text": "Wir verwenden keine Tracking-Cookies. Personenbezogene Daten werden nur zur Beantwortung von Anfragen verarbeitet.",
     "close": "Schließen"
   }
 }
